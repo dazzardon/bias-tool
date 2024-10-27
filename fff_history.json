@@ -1,0 +1,441 @@
+[
+    {
+        "title": "Article",
+        "date": "2024-10-25 00:51:20",
+        "sentiment_score": 0.9856646060943604,
+        "sentiment_label": "NEGATIVE",
+        "bias_score": 2,
+        "propaganda_score": 0,
+        "final_score": 61.56993818283081,
+        "entities": {
+            "Daisy": "PERSON",
+            "Romanian": "NORP",
+            "Tates": "ORG",
+            "2021": "DATE",
+            "Raluca": "ORG",
+            "UK": "GPE",
+            "three": "CARDINAL",
+            "Andrew Tate": "PERSON",
+            "BBC": "ORG",
+            "last year": "DATE",
+            "A few days": "DATE",
+            "Romania": "GPE",
+            "Tristan Tate": "PERSON",
+            "10 to 15": "CARDINAL",
+            "one": "CARDINAL"
+        },
+        "entity_sentiments": {},
+        "biased_sentences": [
+            {
+                "sentence": "She claims that \u201ccontrol and manipulation\u201d played a primary role in their business model.\n\nMost of the models working for the Tates \u201cwere dating them\u201d, according to Raluca.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "He said that his role was simply to \"help them find a cameraman\u201d.\n\nA few days after arriving in Romania, Daisy says she broke up with Tristan Tate, but she claims it did not stop him trying to have sex with her.\n\n\u201cI told him, \u2018no\u2019 10 to 15 times that I didn\u2019t want to.\u201d\n\nHe put his hands around her throat and raped her, she says.\n\nDaisy has not reported her allegation to police.\n\nThe BBC has spoken to one of her friends who says that after Daisy returned to the UK she was upset and told him that Tristan Tate had been forceful with her sexually.\n\nWe asked Tristan Tate about all the allegations against him - he did not comment.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias in the sentence."
+            }
+        ],
+        "propaganda_sentences": []
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-25 01:16:41",
+        "sentiment_score": 0.9856646060943604,
+        "sentiment_label": "NEGATIVE",
+        "bias_score": 2,
+        "propaganda_score": 0,
+        "final_score": 61.56993818283081,
+        "entities": {
+            "Daisy": "PERSON",
+            "Romanian": "NORP",
+            "Tates": "ORG",
+            "2021": "DATE",
+            "Raluca": "ORG",
+            "UK": "GPE",
+            "three": "CARDINAL",
+            "Andrew Tate": "PERSON",
+            "BBC": "ORG",
+            "last year": "DATE",
+            "A few days": "DATE",
+            "Romania": "GPE",
+            "Tristan Tate": "PERSON",
+            "10 to 15": "CARDINAL",
+            "one": "CARDINAL"
+        },
+        "entity_sentiments": {},
+        "biased_sentences": [
+            {
+                "sentence": "She claims that \u201ccontrol and manipulation\u201d played a primary role in their business model.\n\nMost of the models working for the Tates \u201cwere dating them\u201d, according to Raluca.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "He said that his role was simply to \"help them find a cameraman\u201d.\n\nA few days after arriving in Romania, Daisy says she broke up with Tristan Tate, but she claims it did not stop him trying to have sex with her.\n\n\u201cI told him, \u2018no\u2019 10 to 15 times that I didn\u2019t want to.\u201d\n\nHe put his hands around her throat and raped her, she says.\n\nDaisy has not reported her allegation to police.\n\nThe BBC has spoken to one of her friends who says that after Daisy returned to the UK she was upset and told him that Tristan Tate had been forceful with her sexually.\n\nWe asked Tristan Tate about all the allegations against him - he did not comment.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias in the sentence."
+            }
+        ],
+        "propaganda_sentences": []
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-25 01:21:47",
+        "sentiment_score": 0.9856646060943604,
+        "sentiment_label": "NEGATIVE",
+        "bias_score": 2,
+        "propaganda_score": 0,
+        "final_score": 61.56993818283081,
+        "entities": {
+            "Daisy": "PERSON",
+            "Romanian": "NORP",
+            "Tates": "ORG",
+            "2021": "DATE",
+            "Raluca": "ORG",
+            "UK": "GPE",
+            "three": "CARDINAL",
+            "Andrew Tate": "PERSON",
+            "BBC": "ORG",
+            "last year": "DATE",
+            "A few days": "DATE",
+            "Romania": "GPE",
+            "Tristan Tate": "PERSON",
+            "10 to 15": "CARDINAL",
+            "one": "CARDINAL"
+        },
+        "entity_sentiments": {},
+        "biased_sentences": [
+            {
+                "sentence": "She claims that \u201ccontrol and manipulation\u201d played a primary role in their business model.\n\nMost of the models working for the Tates \u201cwere dating them\u201d, according to Raluca.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "He said that his role was simply to \"help them find a cameraman\u201d.\n\nA few days after arriving in Romania, Daisy says she broke up with Tristan Tate, but she claims it did not stop him trying to have sex with her.\n\n\u201cI told him, \u2018no\u2019 10 to 15 times that I didn\u2019t want to.\u201d\n\nHe put his hands around her throat and raped her, she says.\n\nDaisy has not reported her allegation to police.\n\nThe BBC has spoken to one of her friends who says that after Daisy returned to the UK she was upset and told him that Tristan Tate had been forceful with her sexually.\n\nWe asked Tristan Tate about all the allegations against him - he did not comment.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias in the sentence."
+            }
+        ],
+        "propaganda_sentences": []
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-25 01:23:02",
+        "sentiment_score": 0.9856646060943604,
+        "sentiment_label": "NEGATIVE",
+        "bias_score": 2,
+        "propaganda_score": 0,
+        "final_score": 61.56993818283081,
+        "entities": {
+            "Daisy": "PERSON",
+            "Romanian": "NORP",
+            "Tates": "ORG",
+            "2021": "DATE",
+            "Raluca": "ORG",
+            "UK": "GPE",
+            "three": "CARDINAL",
+            "Andrew Tate": "PERSON",
+            "BBC": "ORG",
+            "last year": "DATE",
+            "A few days": "DATE",
+            "Romania": "GPE",
+            "Tristan Tate": "PERSON",
+            "10 to 15": "CARDINAL",
+            "one": "CARDINAL"
+        },
+        "entity_sentiments": {},
+        "biased_sentences": [
+            {
+                "sentence": "She claims that \u201ccontrol and manipulation\u201d played a primary role in their business model.\n\nMost of the models working for the Tates \u201cwere dating them\u201d, according to Raluca.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "He said that his role was simply to \"help them find a cameraman\u201d.\n\nA few days after arriving in Romania, Daisy says she broke up with Tristan Tate, but she claims it did not stop him trying to have sex with her.\n\n\u201cI told him, \u2018no\u2019 10 to 15 times that I didn\u2019t want to.\u201d\n\nHe put his hands around her throat and raped her, she says.\n\nDaisy has not reported her allegation to police.\n\nThe BBC has spoken to one of her friends who says that after Daisy returned to the UK she was upset and told him that Tristan Tate had been forceful with her sexually.\n\nWe asked Tristan Tate about all the allegations against him - he did not comment.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias in the sentence."
+            }
+        ],
+        "propaganda_sentences": []
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-25 01:39:55",
+        "sentiment_score": 0.9949125051498413,
+        "sentiment_label": "NEGATIVE",
+        "bias_score": 2,
+        "propaganda_score": 0,
+        "final_score": 61.84737515449524,
+        "entities": {
+            "Anna": "PERSON",
+            "BBC": "ORG",
+            "Tate": "PERSON",
+            "2014": "DATE",
+            "Two": "CARDINAL",
+            "2019": "DATE",
+            "the Crown Prosecution Service": "ORG",
+            "Sienna": "PERSON",
+            "first": "ORDINAL",
+            "Andrew Tate": "PERSON",
+            "a decade ago": "DATE",
+            "Luton": "PERSON",
+            "one-night": "TIME",
+            "A few months later": "DATE"
+        },
+        "entity_sentiments": {},
+        "biased_sentences": [
+            {
+                "sentence": "Anna says he also tried to pass the strangulation episode off as a joke: \u201cAre you seriously so offended I strangled you a little bit?\u201d\n\nWhen the BBC asked him about the messages, Mr Tate declined to comment.\n\nIn 2014, Anna told Bedfordshire Police about the alleged attack.",
+                "detected_terms": [
+                    "alleged"
+                ],
+                "explanation": "The term 'alleged' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "Two other women made similar allegations, and the investigation was taken over by Hertfordshire Police.\n\nIn 2019, a file was sent to the Crown Prosecution Service, but it was decided there was not enough evidence to bring charges.\n\nAnother woman, who we are calling Sienna, describes a similar story.\n\nShe says she first met Andrew Tate a decade ago in Luton: \u201cWe got on really well and we had a few drinks.\u201d\n\nShe says they had what she describes as \u201ca standard one-night stand\u201d.\n\nA few months later, Sienna says she met Mr Tate again.\n\nShe claims that on this occasion he attacked her.\n\n\u201cWe went to my bedroom...",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias in the sentence."
+            }
+        ],
+        "propaganda_sentences": []
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-25 01:41:06",
+        "sentiment_score": 0.9949125051498413,
+        "sentiment_label": "NEGATIVE",
+        "bias_score": 2,
+        "propaganda_score": 0,
+        "final_score": 61.84737515449524,
+        "entities": {
+            "Anna": "PERSON",
+            "BBC": "ORG",
+            "Tate": "PERSON",
+            "2014": "DATE",
+            "Two": "CARDINAL",
+            "2019": "DATE",
+            "the Crown Prosecution Service": "ORG",
+            "Sienna": "PERSON",
+            "first": "ORDINAL",
+            "Andrew Tate": "PERSON",
+            "a decade ago": "DATE",
+            "Luton": "PERSON",
+            "one-night": "TIME",
+            "A few months later": "DATE"
+        },
+        "entity_sentiments": {},
+        "biased_sentences": [
+            {
+                "sentence": "Anna says he also tried to pass the strangulation episode off as a joke: \u201cAre you seriously so offended I strangled you a little bit?\u201d\n\nWhen the BBC asked him about the messages, Mr Tate declined to comment.\n\nIn 2014, Anna told Bedfordshire Police about the alleged attack.",
+                "detected_terms": [
+                    "alleged"
+                ],
+                "explanation": "The term 'alleged' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "Two other women made similar allegations, and the investigation was taken over by Hertfordshire Police.\n\nIn 2019, a file was sent to the Crown Prosecution Service, but it was decided there was not enough evidence to bring charges.\n\nAnother woman, who we are calling Sienna, describes a similar story.\n\nShe says she first met Andrew Tate a decade ago in Luton: \u201cWe got on really well and we had a few drinks.\u201d\n\nShe says they had what she describes as \u201ca standard one-night stand\u201d.\n\nA few months later, Sienna says she met Mr Tate again.\n\nShe claims that on this occasion he attacked her.\n\n\u201cWe went to my bedroom...",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias in the sentence."
+            }
+        ],
+        "propaganda_sentences": []
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-25 01:41:46",
+        "sentiment_score": 0.9949125051498413,
+        "sentiment_label": "NEGATIVE",
+        "bias_score": 2,
+        "propaganda_score": 0,
+        "final_score": 61.84737515449524,
+        "entities": {
+            "Anna": "PERSON",
+            "BBC": "ORG",
+            "Tate": "PERSON",
+            "2014": "DATE",
+            "Two": "CARDINAL",
+            "2019": "DATE",
+            "the Crown Prosecution Service": "ORG",
+            "Sienna": "PERSON",
+            "first": "ORDINAL",
+            "Andrew Tate": "PERSON",
+            "a decade ago": "DATE",
+            "Luton": "PERSON",
+            "one-night": "TIME",
+            "A few months later": "DATE"
+        },
+        "entity_sentiments": {},
+        "biased_sentences": [
+            {
+                "sentence": "Anna says he also tried to pass the strangulation episode off as a joke: \u201cAre you seriously so offended I strangled you a little bit?\u201d\n\nWhen the BBC asked him about the messages, Mr Tate declined to comment.\n\nIn 2014, Anna told Bedfordshire Police about the alleged attack.",
+                "detected_terms": [
+                    "alleged"
+                ],
+                "explanation": "The term 'alleged' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "Two other women made similar allegations, and the investigation was taken over by Hertfordshire Police.\n\nIn 2019, a file was sent to the Crown Prosecution Service, but it was decided there was not enough evidence to bring charges.\n\nAnother woman, who we are calling Sienna, describes a similar story.\n\nShe says she first met Andrew Tate a decade ago in Luton: \u201cWe got on really well and we had a few drinks.\u201d\n\nShe says they had what she describes as \u201ca standard one-night stand\u201d.\n\nA few months later, Sienna says she met Mr Tate again.\n\nShe claims that on this occasion he attacked her.\n\n\u201cWe went to my bedroom...",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias in the sentence."
+            }
+        ],
+        "propaganda_sentences": []
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-25 01:54:14",
+        "sentiment_score": 0.9949125051498413,
+        "sentiment_label": "NEGATIVE",
+        "bias_score": 2,
+        "propaganda_score": 0,
+        "final_score": 42.898250102996826,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "Anna says he also tried to pass the strangulation episode off as a joke: \u201cAre you seriously so offended I strangled you a little bit?\u201d\n\nWhen the BBC asked him about the messages, Mr Tate declined to comment.\n\nIn 2014, Anna told Bedfordshire Police about the alleged attack.",
+                "detected_terms": [
+                    "alleged"
+                ],
+                "explanation": "The term 'alleged' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "Two other women made similar allegations, and the investigation was taken over by Hertfordshire Police.\n\nIn 2019, a file was sent to the Crown Prosecution Service, but it was decided there was not enough evidence to bring charges.\n\nAnother woman, who we are calling Sienna, describes a similar story.\n\nShe says she first met Andrew Tate a decade ago in Luton: \u201cWe got on really well and we had a few drinks.\u201d\n\nShe says they had what she describes as \u201ca standard one-night stand\u201d.\n\nA few months later, Sienna says she met Mr Tate again.\n\nShe claims that on this occasion he attacked her.\n\n\u201cWe went to my bedroom...",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias in the sentence."
+            }
+        ],
+        "propaganda_sentences": []
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-25 02:02:16",
+        "sentiment_score": 0.9884649515151978,
+        "sentiment_label": "NEGATIVE",
+        "bias_score": 7,
+        "propaganda_score": 0,
+        "final_score": 50.269299030303955,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "Two women who say they were raped and strangled by the controversial social media influencer Andrew Tate have spoken to the BBC about their experiences.\n\nAnother woman has alleged, for the first time, she was raped by Mr Tate\u2019s younger brother, Tristan - also an influencer with millions of followers.\n\nThe Tate brothers, aged 37 and 36, currently face charges in Romania of human trafficking and forming an organised group to sexually exploit women.",
+                "detected_terms": [
+                    "alleged",
+                    "controversial",
+                    "exploit"
+                ],
+                "explanation": "The term 'alleged' indicates potential bias in the sentence. The term 'controversial' indicates potential bias in the sentence. The term 'exploit' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "They strongly deny the charges against them.\n\nWarning: Contains distressing content and descriptions of sexual violence\n\nAndrew Tate is currently under house arrest in Romania.",
+                "detected_terms": [
+                    "distressing"
+                ],
+                "explanation": "The term 'distressing' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "In addition to the charges he already faces, prosecutors are considering new allegations against him, including having sex with a minor and trafficking underage persons.",
+                "detected_terms": [
+                    "allegations"
+                ],
+                "explanation": "The term 'allegations' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "Both brothers are also being investigated for trafficking 34 more women.\n\nNow, in a new BBC Panorama programme, two British women not involved with the Romanian case against the Tate brothers, have given detailed first-hand accounts of alleged rape and sexual violence by Andrew Tate.",
+                "detected_terms": [
+                    "alleged"
+                ],
+                "explanation": "The term 'alleged' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "The allegations date back at least 10 years, to when Mr Tate was living in Luton.\n\nAnother British woman has made a new allegation of rape against Tristan Tate, saying he put his hands around her throat as he did so.\n\nAnna (not her real name) told us she went out with Andrew Tate in Luton in 2013.",
+                "detected_terms": [
+                    "allegations"
+                ],
+                "explanation": "The term 'allegations' indicates potential bias in the sentence."
+            }
+        ],
+        "propaganda_sentences": []
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-25 02:06:20",
+        "sentiment_score": 0.9958730340003967,
+        "sentiment_label": "NEGATIVE",
+        "bias_score": 8,
+        "propaganda_score": 0,
+        "final_score": 51.917460680007935,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "Two women who say they were raped and strangled by the controversial social media influencer Andrew Tate have spoken to the BBC about their experiences.\n\nAnother woman has alleged, for the first time, she was raped by Mr Tate\u2019s younger brother, Tristan - also an influencer with millions of followers.\n\nThe Tate brothers, aged 37 and 36, currently face charges in Romania of human trafficking and forming an organised group to sexually exploit women.",
+                "detected_terms": [
+                    "alleged",
+                    "controversial",
+                    "exploit"
+                ],
+                "explanation": "The term 'alleged' indicates potential bias in the sentence. The term 'controversial' indicates potential bias in the sentence. The term 'exploit' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "They strongly deny the charges against them.\n\nWarning: Contains distressing content and descriptions of sexual violence\n\nAndrew Tate is currently under house arrest in Romania.",
+                "detected_terms": [
+                    "distressing"
+                ],
+                "explanation": "The term 'distressing' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "In addition to the charges he already faces, prosecutors are considering new allegations against him, including having sex with a minor and trafficking underage persons.",
+                "detected_terms": [
+                    "allegations"
+                ],
+                "explanation": "The term 'allegations' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "Both brothers are also being investigated for trafficking 34 more women.\n\nNow, in a new BBC Panorama programme, two British women not involved with the Romanian case against the Tate brothers, have given detailed first-hand accounts of alleged rape and sexual violence by Andrew Tate.",
+                "detected_terms": [
+                    "alleged"
+                ],
+                "explanation": "The term 'alleged' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "The allegations date back at least 10 years, to when Mr Tate was living in Luton.\n\nAnother British woman has made a new allegation of rape against Tristan Tate, saying he put his hands around her throat as he did so.\n\nAnna (not her real name) told us she went out with Andrew Tate in Luton in 2013.",
+                "detected_terms": [
+                    "allegations"
+                ],
+                "explanation": "The term 'allegations' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "Out of the blue he just grabbed me by the throat, smashed me to the back of the bed, strangling me extremely hard.\u201d\n\nAnna says he then raped her.\n\nShe says after the attack, Mr Tate sent her disturbing text messages and voice notes about rape and sexual violence.\n\n\u201cAm I a bad person?",
+                "detected_terms": [
+                    "disturbing"
+                ],
+                "explanation": "The term 'disturbing' indicates potential bias in the sentence."
+            }
+        ],
+        "propaganda_sentences": []
+    }
+]

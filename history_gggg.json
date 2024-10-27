@@ -1,0 +1,37 @@
+[
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:47:57",
+        "sentiment_score": -0.5513645964009422,
+        "sentiment_label": "Negative",
+        "bias_score": 3,
+        "propaganda_score": 0,
+        "final_score": 59.97,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "With the election less than three weeks away, it looks like investors will be reluctant to position against such threats even though the election outcome remains very uncertain. If you haven't seen it already, please have a look at our market scenario analysis for the US election. For the US today, the highlight will be the September US retail sales data and weekly jobless claims. Retail sales are expected to remain reasonable, with the control group at 0.3% MoM.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias."
+            },
+            {
+                "sentence": "Weekly initial claims are expected to remain high at 258,000, but uncertainty about the impact of Hurricane Helene and the port strike will prevent the market from overreacting to this data. Given the large weighting of the euro in the DXY, the DXY could dip back to 103.00/103.20 if we are right with our ECB/euro analysis today, but we suspect the dollar finds decent support on any dips now. Chris Turner The market is pricing a 25bp ECB rate cut today with a 97% probability.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias."
+            },
+            {
+                "sentence": "We are fearful that the local central bank could be cutting rates too deeply and the peso starts to take the strain again \u2013\u00a0especially with the central bank having failed to rebuild FX reserves after a massive intervention campaign in 2022. Pressure is building for USD/CLP to push decisively through 950.",
+                "detected_terms": [
+                    "fearful"
+                ],
+                "explanation": "The term 'fearful' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [],
+        "username": "gggg"
+    }
+]

@@ -1,0 +1,827 @@
+[
+    {
+        "title": "Article",
+        "date": "2024-10-27 00:22:18",
+        "sentiment_score": -0.32822923064231874,
+        "sentiment_label": "NEGATIVE",
+        "bias_score": 3,
+        "propaganda_score": 19,
+        "final_score": 0,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "If you haven&#x27;t seen it already, please have a look at our market scenario analysis for the US election.\nFor the US today, the highlight will be the September US retail sales data and weekly jobless claims.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "Weekly initial claims are expected to remain high at 258,000, but uncertainty about the impact of Hurricane Helene and the port strike will prevent the market from overreacting to this data. Given the large weighting of the euro in the DXY, the DXY could dip back to 103.00/103.20 if we are right with our ECB/euro analysis today, but we suspect the dollar finds decent support on any dips now. Chris Turner EUR: Some upside risks today The market is pricing a 25bp ECB rate cut today with a 97%",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias in the sentence."
+            },
+            {
+                "sentence": "Equally, the peso suffered greatly under Trump between 2018-19.\nWe are fearful that the local central bank could be cutting rates too deeply and the peso starts to take the strain again \u2013 especially with the central bank having failed to rebuild FX reserves after a massive intervention campaign in 2022.",
+                "detected_terms": [
+                    "fearful"
+                ],
+                "explanation": "The term 'fearful' indicates potential bias in the sentence."
+            }
+        ],
+        "propaganda_sentences": [
+            {
+                "sentence": "We also have US retail sales and a Turkish rate decision\nUSD: &#x27;Tariff is the most beautiful word&#x27;\nLooking across global FX markets, one could be forgiven for thinking that the market is starting to position for a Donald Trump win.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "Most emerging currencies are under pressure. And you can see why. In an entertaining interview with Bloomberg on Tuesday, Trump went large on using tariffs should he make it back into the White House. As columnists have said, no one should be surprised if this happens. The most immediate casualty from that interview was the Mexican peso. When it comes to nearshoring, Donald Trump wants US corporates to shorten supply chains not just into Mexico, but into the US itself.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "He intends to use tariffs to ensure that will be the case.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "In addition, when it comes to broader tariffs \u2013 particularly on the European auto industry \u2013 Trump said that tariffs of 10% would not be enough.\nWith the election less than three weeks away, it looks like investors will be reluctant to position against such threats even though the election outcome remains very uncertain.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "If you haven&#x27;t seen it already, please have a look at our market scenario analysis for the US election.\nFor the US today, the highlight will be the September US retail sales data and weekly jobless claims.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "Retail sales are expected to remain reasonable, with the control group at 0.3% MoM.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "Weekly initial claims are expected to remain high at 258,000, but uncertainty about the impact of Hurricane Helene and the port strike will prevent the market from overreacting to this data. Given the large weighting of the euro in the DXY, the DXY could dip back to 103.00/103.20 if we are right with our ECB/euro analysis today, but we suspect the dollar finds decent support on any dips now. Chris Turner EUR: Some upside risks today The market is pricing a 25bp ECB rate cut today with a 97%",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "probability.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "We doubt the ECB will disappoint those expectations, but we see upside risks to the short end of the EUR rates curve today.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "This is because the market now virtually prices a 25bp rate cut at each of the next six meetings and we do not believe the ECB is ready to capitulate and support faster easing (some 50bp cuts) towards the neutral rate near 2.00/2.25% for the deposit rate.\nIf we&#x27;re right, EUR/USD could be due a corrective bounce to the 1.0900/0920 area, although such gains may prove temporary.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "Perhaps a cleaner story for euro strength today will be EUR/CHF. Here we feel EUR/CHF has very much been dragged around by short-dated EUR rates this year and the view that the Swiss National Bank has a floor for the policy rate at 0.50%. Higher short-dated EUR rates today could drag EUR/CHF possibly up to the 0.9480/9500 area.\nChris Turner\nCEE: Central bankers will give the market the desired hawkishness\nThursday seems to be the highlight of the week.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "On top of global events today, we also have a Central Bank of Turkey meeting and important speakers in Hungary.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "First thing this morning there is a local conference in Budapest where the finance minister, who according to newspaper rumours is expected to become the next central bank governor, the minister for economy and the deputy governor of the National Bank of Hungary are all expected to speak.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "With EUR/HUF levels above 400, we believe the speakers will have more attention than usual and we are likely to hear hawkish news from central bankers that could help the HUF get back on track.\nLater today we will see the Central Bank of Turkey decision.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "In line with expectations, we expect the rate to remain unchanged at 50%. September inflation numbers surprised to the upside and the market is expecting an additional dose of hawkishness. Market expectations of a first cut are shifting from October/November to December/January, which is showing up in the forward pricing. However, the spot TRY market remains on the same trajectory, which is the main reason we prefer spot over forwards at the moment, collecting high carry.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "Thus, reassurance from the Central Bank of Turkey should only extend the window where TRY remains the currency of choice for markets, while TURKGBs rather remain on the sidelines, waiting for the first CBT rate cut.\nFrantisek Taborsky\nCLP: Another 25bp cut today leaves the peso with little protection\nThe fact that Chinese stimulus measures have yet to deliver a material re-rating in China&#x27;s growth prospects is evidenced by the ongoing weakness in Chile&#x27;s peso.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "This continues to trade towards the weak side of a four-month trading range. In focus much later today will be the central bank&#x27;s policy decision. Economists are unanimous in expecting a 25bp cut to 5.25%. As discussed in this month&#x27;s FX Talking, the real rate protection for the peso is starting to look very lean.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "Equally, the peso suffered greatly under Trump between 2018-19.\nWe are fearful that the local central bank could be cutting rates too deeply and the peso starts to take the strain again \u2013 especially with the central bank having failed to rebuild FX reserves after a massive intervention campaign in 2022.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            },
+            {
+                "sentence": "Pressure is building for USD/CLP to push decisively through 950.\nChris Turner\nThis publication has been prepared by ING solely for information purposes irrespective of a particular user&#x27;s means, financial situation or investment objectives. The information does not constitute investment recommendation, and nor is it investment, legal or tax advice or an offer or solicitation to purchase or sell any financial instrument. Read more",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The sentence contains the propaganda technique 'Appeal_to_Authority', which involves using authority figures or experts to support an argument.."
+            }
+        ],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 00:48:37",
+        "sentiment_score": -0.38916600942611695,
+        "sentiment_label": "Negative",
+        "bias_score": 6,
+        "propaganda_score": 10,
+        "final_score": 25.27,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "Who is Andrew Tate? The self-proclaimed misogynist influencer\n- Published\nThe controversial British-American influencer Andrew Tate is facing trial in Romania. He has been charged with rape, human trafficking and forming an organised crime group to sexually exploit women.\nAfter more than seven months under house arrest, he was released in August 2023 but still faces restrictions on his movements.\nHis brother Tristan and two associates also face charges.",
+                "detected_terms": [
+                    "controversial"
+                ],
+                "explanation": "The term 'controversial' indicates potential bias."
+            },
+            {
+                "sentence": "All have denied the allegations.\nSeparately, they are wanted in the UK to face allegations of sexual assault which they also deny.\nSelf-proclaimed &quot;misogynist&quot; Andrew Tate first rose to fame after an appearance on the British version of reality TV show Big Brother in 2016.",
+                "detected_terms": [
+                    "allegations"
+                ],
+                "explanation": "The term 'allegations' indicates potential bias."
+            },
+            {
+                "sentence": "He has since been reinstated on the platform, now known as X.\nIn a combative interview with the BBC in June 2023, when pushed on whether his controversial views on women harmed young people, the influencer claimed he was a &quot;force for good&quot; and that he was &quot;acting under the instruction of God to do good things&quot;.\nWhat are Andrew Tate&#x27;s legal cases?\nAndrew Tate and his brother face a number of civic and criminal legal cases.\nTate was detained alongside his brother Tristan in December 2022 in a suburb of the Romanian capital, Bucharest, as part of an investigation into allegations of human trafficking and rape, which they deny.",
+                "detected_terms": [
+                    "criminal",
+                    "allegations",
+                    "controversial"
+                ],
+                "explanation": "The term 'criminal' indicates potential bias. The term 'allegations' indicates potential bias. The term 'controversial' indicates potential bias."
+            },
+            {
+                "sentence": "This decision was opposed by prosecutors, and overturned less than two weeks later by the Bucharest Court of Appeal.\nIn March 2024, British police investigating Andrew Tate on allegations of rape and human trafficking were granted a warrant to extradite him and his brother to the UK.\nSeparately, in May 2024, lawyers for four women who claim they were assaulted by Tate and his brother said they were bringing a civil case against him at the High Court in the UK for &quot;damages for injuries they suffered as a result&quot;.\nA representative for the Tate brothers said in response that they &quot;unequivocally deny all allegations&quot;.\nAnother legal issue facing the pair in the UK is a civil case brought in July 2024 by Devon and Cornwall Police, in which they are accused of failing to pay any tax on \u00a321m of revenue from their online businesses, including online &quot;wealth creation&quot; platform Hustlers&#x27; University.\nA third person known only as J is also accused as part of the case, with the force seeking to recover about \u00a32.8 million held in seven frozen bank accounts, an application which the defendants are contesting.\nHow does Andrew Tate make his money?\nTate has described himself as a &quot;self-made multi-millionaire&quot; and said he earned money through &quot;a little webcam business from my apartment&quot;.\n&quot;I had 75 women working for me in four locations and I was doing $600,000 a month from webcam,&quot; he said in a podcast interview.\nIn a now-deleted page on his website, he said he brought women into the &quot;adult entertainment industry&quot;.\n&quot;My job was to meet a girl, go on a few dates, sleep with her, test if she&#x27;s quality, get her to fall in love with me to where she&#x27;d do anything I say and then get her on webcam so we could become rich together,&quot; he wrote on the page - which was subsequently taken down in February 2022.\nTate works alongside his brother, Tristan, who told the Daily Mirror that their business was &quot;all a big scam&quot;, external which saw men pay to talk to women online.\n&quot;I&#x27;ve seen men sell cars, TVs...",
+                "detected_terms": [
+                    "allegations"
+                ],
+                "explanation": "The term 'allegations' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [
+            {
+                "sentence": "Who is Andrew Tate? The self-proclaimed misogynist influencer\n- Published\nThe controversial British-American influencer Andrew Tate is facing trial in Romania. He has been charged with rape, human trafficking and forming an organised crime group to sexually exploit women.\nAfter more than seven months under house arrest, he was released in August 2023 but still faces restrictions on his movements.\nHis brother Tristan and two associates also face charges.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures to support an argument."
+            },
+            {
+                "sentence": "All have denied the allegations.\nSeparately, they are wanted in the UK to face allegations of sexual assault which they also deny.\nSelf-proclaimed &quot;misogynist&quot; Andrew Tate first rose to fame after an appearance on the British version of reality TV show Big Brother in 2016.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures to support an argument."
+            },
+            {
+                "sentence": "He only lasted six days on the programme, before being removed following the emergence of a video that appeared to show him attacking a woman.\nHe said at the time that the footage had been edited and was &quot;a total lie trying to make me look bad&quot;.\nNow, the 36-year-old former kickboxer boasts more than 6.9 million followers on Twitter - and a worldwide profile.\nWho is Andrew Tate?\nTate - full name Emory Andrew Tate - was born in December 1986.\nHe is named after his father, an American who worked for the US Air Force in Britain, and who was also a chess master.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures to support an argument."
+            },
+            {
+                "sentence": "His mother and father met in the UK before moving to America where Tate was raised until his parents divorced.\nFollowing the divorce, Tate moved to Luton, England, with his mother.\nBoth Tate and his younger brother Tristan said they experienced poverty in England.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures to support an argument."
+            },
+            {
+                "sentence": "In interviews, they recalled going to KFC to save other people&#x27;s leftover chicken and freezing it for future meals.\nTate was a kickboxing world champion four times - but it was online where he found worldwide fame.\nTate has appeared in countless videos, flaunting an ultra-luxurious lifestyle of fast cars, private jets, and yachts.\nShortly before his arrest in December 2022, he engaged in a row with environmental activist Greta Thunberg on Twitter.\nHe claimed to have 33 cars and said he would send her a list of their &quot;respective enormous emissions&quot;.\nOn TikTok, videos with the #AndrewTate hashtag have been viewed billions of times.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures to support an argument."
+            },
+            {
+                "sentence": "That figure also includes videos made by people criticising the influencer.\nWhat has Andrew Tate said about women?\nIn an interview with another YouTuber, he said he was &quot;absolutely a misogynist&quot;, and added: &quot;I&#x27;m a realist and when you&#x27;re a realist, you&#x27;re sexist.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures to support an argument."
+            },
+            {
+                "sentence": "There&#x27;s no way you can be rooted in reality and not be sexist.&quot;\nIn that same video, he described women as &quot;intrinsically lazy&quot; and said there was &quot;no such thing as an independent female&quot;.\nAndrew Tate has been singled out for the effect he has had in spreading misogyny online among boys and young men by authorities in the UK.\nSpeaking at the launch of a report into violence against women and girls in July 2024, Deputy Chief Constable Maggie Blyth said: &quot;We know that some of this is also linked to radicalisation of young people online, we know the influencers, Andrew Tate, the element of influencing of particularly boys, is quite terrifying.&quot;\nThe report stated that police were now working with counter-terrorism teams to combat the risks of young men being radicalised.\nNumerous social media platforms, including YouTube, Facebook, Instagram and TikTok, have banned him - with the latter saying that &quot;misogyny is a hateful ideology that is not tolerated&quot;.\nTate was banned from Twitter for saying women should &quot;bear responsibility&quot; for being sexually assaulted.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures to support an argument."
+            },
+            {
+                "sentence": "He has since been reinstated on the platform, now known as X.\nIn a combative interview with the BBC in June 2023, when pushed on whether his controversial views on women harmed young people, the influencer claimed he was a &quot;force for good&quot; and that he was &quot;acting under the instruction of God to do good things&quot;.\nWhat are Andrew Tate&#x27;s legal cases?\nAndrew Tate and his brother face a number of civic and criminal legal cases.\nTate was detained alongside his brother Tristan in December 2022 in a suburb of the Romanian capital, Bucharest, as part of an investigation into allegations of human trafficking and rape, which they deny.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures to support an argument."
+            },
+            {
+                "sentence": "The pair were charged along with two Romanian female suspects in June 2023.\nIn response to the charges against them, the media team for the Tate brothers said: &quot;While this news is undoubtedly predictable, we embrace the opportunity it presents to demonstrate their innocence and vindicate their reputation.&quot;\nIn December 2023, the Tate brothers were ordered not to leave Romania after they made a request to visit their mother in hospital in the UK.\nA Romanian court ruled in early July 2024 that Tate and his brother could leave the country but had to stay within the European Union.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures to support an argument."
+            },
+            {
+                "sentence": "This decision was opposed by prosecutors, and overturned less than two weeks later by the Bucharest Court of Appeal.\nIn March 2024, British police investigating Andrew Tate on allegations of rape and human trafficking were granted a warrant to extradite him and his brother to the UK.\nSeparately, in May 2024, lawyers for four women who claim they were assaulted by Tate and his brother said they were bringing a civil case against him at the High Court in the UK for &quot;damages for injuries they suffered as a result&quot;.\nA representative for the Tate brothers said in response that they &quot;unequivocally deny all allegations&quot;.\nAnother legal issue facing the pair in the UK is a civil case brought in July 2024 by Devon and Cornwall Police, in which they are accused of failing to pay any tax on \u00a321m of revenue from their online businesses, including online &quot;wealth creation&quot; platform Hustlers&#x27; University.\nA third person known only as J is also accused as part of the case, with the force seeking to recover about \u00a32.8 million held in seven frozen bank accounts, an application which the defendants are contesting.\nHow does Andrew Tate make his money?\nTate has described himself as a &quot;self-made multi-millionaire&quot; and said he earned money through &quot;a little webcam business from my apartment&quot;.\n&quot;I had 75 women working for me in four locations and I was doing $600,000 a month from webcam,&quot; he said in a podcast interview.\nIn a now-deleted page on his website, he said he brought women into the &quot;adult entertainment industry&quot;.\n&quot;My job was to meet a girl, go on a few dates, sleep with her, test if she&#x27;s quality, get her to fall in love with me to where she&#x27;d do anything I say and then get her on webcam so we could become rich together,&quot; he wrote on the page - which was subsequently taken down in February 2022.\nTate works alongside his brother, Tristan, who told the Daily Mirror that their business was &quot;all a big scam&quot;, external which saw men pay to talk to women online.\n&quot;I&#x27;ve seen men sell cars, TVs...",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures to support an argument."
+            }
+        ],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:09:33",
+        "sentiment_score": -0.9916062951087952,
+        "sentiment_label": "Negative",
+        "bias_score": 0,
+        "propaganda_score": 1,
+        "final_score": 57.17,
+        "entities": {},
+        "biased_sentences": [],
+        "propaganda_sentences": [
+            {
+                "sentence": "Andrew Tate\nAndrew Tate: The self-proclaimed misogynist\nThe 36-year-old former kickboxer once said women should &quot;bear responsibility&quot; for sexual assault.\nLatest news\nPanorama. Andrew Tate: Accused. Video, 28 minutes\nOana Marocico investigates Andrew and Tristan Tate&#x27;s Romanian webcam business.\n- AttributionBBC One\n- Available for 10 months\n- Attribution\n- Posted28 February\nThe Global Story. Andrew Tate effect: Is misogyny on the rise?",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures or experts to support an argument without presenting substantial evidence."
+            }
+        ],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:26:45",
+        "sentiment_score": -0.9995865225791931,
+        "sentiment_label": "Negative",
+        "bias_score": 2,
+        "propaganda_score": 1,
+        "final_score": 51.01,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "The company&#x27;s aggressive marketing strategy is causing unfit competitors to suffer.",
+                "detected_terms": [
+                    "aggressive",
+                    "unfit"
+                ],
+                "explanation": "The term 'aggressive' indicates potential bias. The term 'unfit' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [
+            {
+                "sentence": "The company&#x27;s aggressive marketing strategy is causing unfit competitors to suffer.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures or experts to support an argument without presenting substantial evidence."
+            }
+        ],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:29:20",
+        "sentiment_score": -0.9995865225791931,
+        "sentiment_label": "Negative",
+        "bias_score": 2,
+        "propaganda_score": 1,
+        "final_score": 51.01,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "The company&#x27;s aggressive marketing strategy is causing unfit competitors to suffer.",
+                "detected_terms": [
+                    "aggressive",
+                    "unfit"
+                ],
+                "explanation": "The term 'aggressive' indicates potential bias. The term 'unfit' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [
+            {
+                "sentence": "The company&#x27;s aggressive marketing strategy is causing unfit competitors to suffer.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures or experts to support an argument without presenting substantial evidence."
+            }
+        ],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:29:24",
+        "sentiment_score": -0.9995865225791931,
+        "sentiment_label": "Negative",
+        "bias_score": 2,
+        "propaganda_score": 1,
+        "final_score": 51.01,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "The company&#x27;s aggressive marketing strategy is causing unfit competitors to suffer.",
+                "detected_terms": [
+                    "aggressive",
+                    "unfit"
+                ],
+                "explanation": "The term 'aggressive' indicates potential bias. The term 'unfit' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [
+            {
+                "sentence": "The company&#x27;s aggressive marketing strategy is causing unfit competitors to suffer.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures or experts to support an argument without presenting substantial evidence."
+            }
+        ],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:29:28",
+        "sentiment_score": -0.9995865225791931,
+        "sentiment_label": "Negative",
+        "bias_score": 2,
+        "propaganda_score": 1,
+        "final_score": 51.01,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "The company&#x27;s aggressive marketing strategy is causing unfit competitors to suffer.",
+                "detected_terms": [
+                    "aggressive",
+                    "unfit"
+                ],
+                "explanation": "The term 'aggressive' indicates potential bias. The term 'unfit' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [
+            {
+                "sentence": "The company&#x27;s aggressive marketing strategy is causing unfit competitors to suffer.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures or experts to support an argument without presenting substantial evidence."
+            }
+        ],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:29:50",
+        "sentiment_score": -0.9995865225791931,
+        "sentiment_label": "Negative",
+        "bias_score": 2,
+        "propaganda_score": 1,
+        "final_score": 51.01,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "The company&#x27;s aggressive marketing strategy is causing unfit competitors to suffer.",
+                "detected_terms": [
+                    "aggressive",
+                    "unfit"
+                ],
+                "explanation": "The term 'aggressive' indicates potential bias. The term 'unfit' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [
+            {
+                "sentence": "The company&#x27;s aggressive marketing strategy is causing unfit competitors to suffer.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures or experts to support an argument without presenting substantial evidence."
+            }
+        ],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:31:07",
+        "sentiment_score": -0.9995865225791931,
+        "sentiment_label": "Negative",
+        "bias_score": 2,
+        "propaganda_score": 1,
+        "final_score": 51.01,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "The company&#x27;s aggressive marketing strategy is causing unfit competitors to suffer.",
+                "detected_terms": [
+                    "aggressive",
+                    "unfit"
+                ],
+                "explanation": "The term 'aggressive' indicates potential bias. The term 'unfit' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [
+            {
+                "sentence": "The company&#x27;s aggressive marketing strategy is causing unfit competitors to suffer.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The propaganda technique 'Appeal_to_Authority' involves using authority figures or experts to support an argument without presenting substantial evidence."
+            }
+        ],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:33:54",
+        "sentiment_score": -0.9995865225791931,
+        "sentiment_label": "Negative",
+        "bias_score": 2,
+        "propaganda_score": 1,
+        "final_score": 51.01,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "The company&#x27;s aggressive marketing strategy is causing unfit competitors to suffer.",
+                "detected_terms": [
+                    "aggressive",
+                    "unfit"
+                ],
+                "explanation": "The term 'aggressive' indicates potential bias. The term 'unfit' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [
+            {
+                "sentence": "The company&#x27;s aggressive marketing strategy is causing unfit competitors to suffer.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The text involves a propaganda technique."
+            }
+        ],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:36:27",
+        "sentiment_score": -0.6115856915712357,
+        "sentiment_label": "Negative",
+        "bias_score": 3,
+        "propaganda_score": 12,
+        "final_score": 28.77,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "If you haven&#x27;t seen it already, please have a look at our market scenario analysis for the US election.\nFor the US today, the highlight will be the September US retail sales data and weekly jobless claims. Retail sales are expected to remain reasonable, with the control group at 0.3% MoM.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias."
+            },
+            {
+                "sentence": "Weekly initial claims are expected to remain high at 258,000, but uncertainty about the impact of Hurricane Helene and the port strike will prevent the market from overreacting to this data.\nGiven the large weighting of the euro in the DXY, the DXY could dip back to 103.00/103.20 if we are right with our ECB/euro analysis today, but we suspect the dollar finds decent support on any dips now.\nChris Turner\nEUR: Some upside risks today\nThe market is pricing a 25bp ECB rate cut today with a 97% probability.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias."
+            },
+            {
+                "sentence": "Equally, the peso suffered greatly under Trump between 2018-19.\nWe are fearful that the local central bank could be cutting rates too deeply and the peso starts to take the strain again \u2013 especially with the central bank having failed to rebuild FX reserves after a massive intervention campaign in 2022.",
+                "detected_terms": [
+                    "fearful"
+                ],
+                "explanation": "The term 'fearful' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [
+            {
+                "sentence": "We also have US retail sales and a Turkish rate decision\nUSD: &#x27;Tariff is the most beautiful word&#x27;\nLooking across global FX markets, one could be forgiven for thinking that the market is starting to position for a Donald Trump win. Most emerging currencies are under pressure. And you can see why. In an entertaining interview with Bloomberg on Tuesday, Trump went large on using tariffs should he make it back into the White House.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The text involves a propaganda technique."
+            },
+            {
+                "sentence": "As columnists have said, no one should be surprised if this happens. The most immediate casualty from that interview was the Mexican peso. When it comes to nearshoring, Donald Trump wants US corporates to shorten supply chains not just into Mexico, but into the US itself. He intends to use tariffs to ensure that will be the case.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The text involves a propaganda technique."
+            },
+            {
+                "sentence": "In addition, when it comes to broader tariffs \u2013 particularly on the European auto industry \u2013 Trump said that tariffs of 10% would not be enough.\nWith the election less than three weeks away, it looks like investors will be reluctant to position against such threats even though the election outcome remains very uncertain.",
+                "detected_terms": [
+                    "propaganda"
+                ],
+                "explanation": "The text involves a propaganda technique."
+            },
+            {
+                "sentence": "If you haven&#x27;t seen it already, please have a look at our market scenario analysis for the US election.\nFor the US today, the highlight will be the September US retail sales data and weekly jobless claims. Retail sales are expected to remain reasonable, with the control group at 0.3% MoM.",
+                "detected_terms": [
+                    "propaganda"
+                ],
+                "explanation": "The text involves a propaganda technique."
+            },
+            {
+                "sentence": "Weekly initial claims are expected to remain high at 258,000, but uncertainty about the impact of Hurricane Helene and the port strike will prevent the market from overreacting to this data.\nGiven the large weighting of the euro in the DXY, the DXY could dip back to 103.00/103.20 if we are right with our ECB/euro analysis today, but we suspect the dollar finds decent support on any dips now.\nChris Turner\nEUR: Some upside risks today\nThe market is pricing a 25bp ECB rate cut today with a 97% probability.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The text involves a propaganda technique."
+            },
+            {
+                "sentence": "We doubt the ECB will disappoint those expectations, but we see upside risks to the short end of the EUR rates curve today.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The text involves a propaganda technique."
+            },
+            {
+                "sentence": "On top of global events today, we also have a Central Bank of Turkey meeting and important speakers in Hungary. First thing this morning there is a local conference in Budapest where the finance minister, who according to newspaper rumours is expected to become the next central bank governor, the minister for economy and the deputy governor of the National Bank of Hungary are all expected to speak.",
+                "detected_terms": [
+                    "propaganda"
+                ],
+                "explanation": "The text involves a propaganda technique."
+            },
+            {
+                "sentence": "Market expectations of a first cut are shifting from October/November to December/January, which is showing up in the forward pricing. However, the spot TRY market remains on the same trajectory, which is the main reason we prefer spot over forwards at the moment, collecting high carry.",
+                "detected_terms": [
+                    "propaganda"
+                ],
+                "explanation": "The text involves a propaganda technique."
+            },
+            {
+                "sentence": "Thus, reassurance from the Central Bank of Turkey should only extend the window where TRY remains the currency of choice for markets, while TURKGBs rather remain on the sidelines, waiting for the first CBT rate cut.\nFrantisek Taborsky\nCLP: Another 25bp cut today leaves the peso with little protection\nThe fact that Chinese stimulus measures have yet to deliver a material re-rating in China&#x27;s growth prospects is evidenced by the ongoing weakness in Chile&#x27;s peso.",
+                "detected_terms": [
+                    "propaganda"
+                ],
+                "explanation": "The text involves a propaganda technique."
+            },
+            {
+                "sentence": "This continues to trade towards the weak side of a four-month trading range. In focus much later today will be the central bank&#x27;s policy decision. Economists are unanimous in expecting a 25bp cut to 5.25%. As discussed in this month&#x27;s FX Talking, the real rate protection for the peso is starting to look very lean.",
+                "detected_terms": [
+                    "propaganda"
+                ],
+                "explanation": "The text involves a propaganda technique."
+            },
+            {
+                "sentence": "Equally, the peso suffered greatly under Trump between 2018-19.\nWe are fearful that the local central bank could be cutting rates too deeply and the peso starts to take the strain again \u2013 especially with the central bank having failed to rebuild FX reserves after a massive intervention campaign in 2022.",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The text involves a propaganda technique."
+            },
+            {
+                "sentence": "Pressure is building for USD/CLP to push decisively through 950.\nChris Turner\nThis publication has been prepared by ING solely for information purposes irrespective of a particular user&#x27;s means, financial situation or investment objectives. The information does not constitute investment recommendation, and nor is it investment, legal or tax advice or an offer or solicitation to purchase or sell any financial instrument. Read more",
+                "detected_terms": [
+                    "Appeal_to_Authority"
+                ],
+                "explanation": "The text involves a propaganda technique."
+            }
+        ],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:39:59",
+        "sentiment_score": -0.6115856915712357,
+        "sentiment_label": "Negative",
+        "bias_score": 3,
+        "propaganda_score": 0,
+        "final_score": 58.77,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "If you haven&#x27;t seen it already, please have a look at our market scenario analysis for the US election.\nFor the US today, the highlight will be the September US retail sales data and weekly jobless claims. Retail sales are expected to remain reasonable, with the control group at 0.3% MoM.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias."
+            },
+            {
+                "sentence": "Weekly initial claims are expected to remain high at 258,000, but uncertainty about the impact of Hurricane Helene and the port strike will prevent the market from overreacting to this data.\nGiven the large weighting of the euro in the DXY, the DXY could dip back to 103.00/103.20 if we are right with our ECB/euro analysis today, but we suspect the dollar finds decent support on any dips now.\nChris Turner\nEUR: Some upside risks today\nThe market is pricing a 25bp ECB rate cut today with a 97% probability.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias."
+            },
+            {
+                "sentence": "Equally, the peso suffered greatly under Trump between 2018-19.\nWe are fearful that the local central bank could be cutting rates too deeply and the peso starts to take the strain again \u2013 especially with the central bank having failed to rebuild FX reserves after a massive intervention campaign in 2022.",
+                "detected_terms": [
+                    "fearful"
+                ],
+                "explanation": "The term 'fearful' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:40:45",
+        "sentiment_score": -0.44222519227436613,
+        "sentiment_label": "Negative",
+        "bias_score": 4,
+        "propaganda_score": 0,
+        "final_score": 59.16,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "Andrew Tate detained in Romania over rape and human trafficking case\n- Published\nControversial online influencer Andrew Tate has been detained in Romania as part of a human trafficking and rape investigation.\nTate - who was detained alongside his brother Tristan - had his house raided in the capital, Bucharest.\nA police spokesperson confirmed the arrests to the BBC.\nThe former kickboxer rose to fame in 2016 when he was removed from British TV show Big Brother over a video which appeared to show him attacking a woman.\nHe went on to gain notoriety online, with Twitter banning him for saying women should &quot;bear responsibility&quot; for being sexually assaulted.",
+                "detected_terms": [
+                    "controversial"
+                ],
+                "explanation": "The term 'controversial' indicates potential bias."
+            },
+            {
+                "sentence": "The account also retweeted Matrix memes posted by Twitter owner Elon Musk.\nOn Thursday night, Romania&#x27;s Directorate for Investigating Organized Crime and Terrorism issued a statement, but did not name the Tate brothers, stating that two British citizens and two Romanian citizens were suspected of being part of a human trafficking group.\nThe statement said officers had identified six people who were &quot;sexually exploited&quot; by what it called an &quot;organised criminal group&quot;.\nPolice alleged the victims were &quot;recruited&quot; by the British citizens, who they said had misrepresented their intention to enter into a relationship with the victims - which it called &quot;the loverboy method&quot;.\nThey were later forced to perform in pornographic content under threat of violence, the statement said.\nPolice also released a video of the raid, showing guns, knives, and money on display in one room.\nTate moved to Romania five years ago.",
+                "detected_terms": [
+                    "alleged",
+                    "criminal",
+                    "suspected"
+                ],
+                "explanation": "The term 'alleged' indicates potential bias. The term 'criminal' indicates potential bias. The term 'suspected' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:44:47",
+        "sentiment_score": -0.44222519227436613,
+        "sentiment_label": "Negative",
+        "bias_score": 4,
+        "propaganda_score": 0,
+        "final_score": 59.16,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "Andrew Tate detained in Romania over rape and human trafficking case\n- Published\nControversial online influencer Andrew Tate has been detained in Romania as part of a human trafficking and rape investigation.\nTate - who was detained alongside his brother Tristan - had his house raided in the capital, Bucharest.\nA police spokesperson confirmed the arrests to the BBC.\nThe former kickboxer rose to fame in 2016 when he was removed from British TV show Big Brother over a video which appeared to show him attacking a woman.\nHe went on to gain notoriety online, with Twitter banning him for saying women should &quot;bear responsibility&quot; for being sexually assaulted.",
+                "detected_terms": [
+                    "controversial"
+                ],
+                "explanation": "The term 'controversial' indicates potential bias."
+            },
+            {
+                "sentence": "The account also retweeted Matrix memes posted by Twitter owner Elon Musk.\nOn Thursday night, Romania&#x27;s Directorate for Investigating Organized Crime and Terrorism issued a statement, but did not name the Tate brothers, stating that two British citizens and two Romanian citizens were suspected of being part of a human trafficking group.\nThe statement said officers had identified six people who were &quot;sexually exploited&quot; by what it called an &quot;organised criminal group&quot;.\nPolice alleged the victims were &quot;recruited&quot; by the British citizens, who they said had misrepresented their intention to enter into a relationship with the victims - which it called &quot;the loverboy method&quot;.\nThey were later forced to perform in pornographic content under threat of violence, the statement said.\nPolice also released a video of the raid, showing guns, knives, and money on display in one room.\nTate moved to Romania five years ago.",
+                "detected_terms": [
+                    "alleged",
+                    "criminal",
+                    "suspected"
+                ],
+                "explanation": "The term 'alleged' indicates potential bias. The term 'criminal' indicates potential bias. The term 'suspected' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:04:04",
+        "sentiment_score": -0.44222519227436613,
+        "sentiment_label": "Negative",
+        "bias_score": 4,
+        "propaganda_score": 0,
+        "final_score": 59.16,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "Andrew Tate detained in Romania over rape and human trafficking case\n- Published\nControversial online influencer Andrew Tate has been detained in Romania as part of a human trafficking and rape investigation.\nTate - who was detained alongside his brother Tristan - had his house raided in the capital, Bucharest.\nA police spokesperson confirmed the arrests to the BBC.\nThe former kickboxer rose to fame in 2016 when he was removed from British TV show Big Brother over a video which appeared to show him attacking a woman.\nHe went on to gain notoriety online, with Twitter banning him for saying women should &quot;bear responsibility&quot; for being sexually assaulted.",
+                "detected_terms": [
+                    "controversial"
+                ],
+                "explanation": "The term 'controversial' indicates potential bias."
+            },
+            {
+                "sentence": "The account also retweeted Matrix memes posted by Twitter owner Elon Musk.\nOn Thursday night, Romania&#x27;s Directorate for Investigating Organized Crime and Terrorism issued a statement, but did not name the Tate brothers, stating that two British citizens and two Romanian citizens were suspected of being part of a human trafficking group.\nThe statement said officers had identified six people who were &quot;sexually exploited&quot; by what it called an &quot;organised criminal group&quot;.\nPolice alleged the victims were &quot;recruited&quot; by the British citizens, who they said had misrepresented their intention to enter into a relationship with the victims - which it called &quot;the loverboy method&quot;.\nThey were later forced to perform in pornographic content under threat of violence, the statement said.\nPolice also released a video of the raid, showing guns, knives, and money on display in one room.\nTate moved to Romania five years ago.",
+                "detected_terms": [
+                    "alleged",
+                    "criminal",
+                    "suspected"
+                ],
+                "explanation": "The term 'alleged' indicates potential bias. The term 'criminal' indicates potential bias. The term 'suspected' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:04:28",
+        "sentiment_score": -0.44222519227436613,
+        "sentiment_label": "Negative",
+        "bias_score": 4,
+        "propaganda_score": 0,
+        "final_score": 59.16,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "Andrew Tate detained in Romania over rape and human trafficking case\n- Published\nControversial online influencer Andrew Tate has been detained in Romania as part of a human trafficking and rape investigation.\nTate - who was detained alongside his brother Tristan - had his house raided in the capital, Bucharest.\nA police spokesperson confirmed the arrests to the BBC.\nThe former kickboxer rose to fame in 2016 when he was removed from British TV show Big Brother over a video which appeared to show him attacking a woman.\nHe went on to gain notoriety online, with Twitter banning him for saying women should &quot;bear responsibility&quot; for being sexually assaulted.",
+                "detected_terms": [
+                    "controversial"
+                ],
+                "explanation": "The term 'controversial' indicates potential bias."
+            },
+            {
+                "sentence": "The account also retweeted Matrix memes posted by Twitter owner Elon Musk.\nOn Thursday night, Romania&#x27;s Directorate for Investigating Organized Crime and Terrorism issued a statement, but did not name the Tate brothers, stating that two British citizens and two Romanian citizens were suspected of being part of a human trafficking group.\nThe statement said officers had identified six people who were &quot;sexually exploited&quot; by what it called an &quot;organised criminal group&quot;.\nPolice alleged the victims were &quot;recruited&quot; by the British citizens, who they said had misrepresented their intention to enter into a relationship with the victims - which it called &quot;the loverboy method&quot;.\nThey were later forced to perform in pornographic content under threat of violence, the statement said.\nPolice also released a video of the raid, showing guns, knives, and money on display in one room.\nTate moved to Romania five years ago.",
+                "detected_terms": [
+                    "alleged",
+                    "criminal",
+                    "suspected"
+                ],
+                "explanation": "The term 'alleged' indicates potential bias. The term 'criminal' indicates potential bias. The term 'suspected' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [],
+        "username": "ggg"
+    },
+    {
+        "title": "Article",
+        "date": "2024-10-27 01:37:27",
+        "sentiment_score": -0.6115856915712357,
+        "sentiment_label": "Negative",
+        "bias_score": 3,
+        "propaganda_score": 0,
+        "final_score": 58.77,
+        "entities": {},
+        "biased_sentences": [
+            {
+                "sentence": "If you haven&#x27;t seen it already, please have a look at our market scenario analysis for the US election.\nFor the US today, the highlight will be the September US retail sales data and weekly jobless claims. Retail sales are expected to remain reasonable, with the control group at 0.3% MoM.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias."
+            },
+            {
+                "sentence": "Weekly initial claims are expected to remain high at 258,000, but uncertainty about the impact of Hurricane Helene and the port strike will prevent the market from overreacting to this data.\nGiven the large weighting of the euro in the DXY, the DXY could dip back to 103.00/103.20 if we are right with our ECB/euro analysis today, but we suspect the dollar finds decent support on any dips now.\nChris Turner\nEUR: Some upside risks today\nThe market is pricing a 25bp ECB rate cut today with a 97% probability.",
+                "detected_terms": [
+                    "claims"
+                ],
+                "explanation": "The term 'claims' indicates potential bias."
+            },
+            {
+                "sentence": "Equally, the peso suffered greatly under Trump between 2018-19.\nWe are fearful that the local central bank could be cutting rates too deeply and the peso starts to take the strain again \u2013 especially with the central bank having failed to rebuild FX reserves after a massive intervention campaign in 2022.",
+                "detected_terms": [
+                    "fearful"
+                ],
+                "explanation": "The term 'fearful' indicates potential bias."
+            }
+        ],
+        "propaganda_sentences": [],
+        "username": "ggg"
+    },
+    

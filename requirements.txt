@@ -1,0 +1,15 @@
+# requirements.txt
+
+streamlit==1.25.0
+numpy==1.23.5
+pandas==1.5.3
+transformers==4.35.0
+torch==2.0.1
+spacy==3.8.0
+PyYAML==6.0
+trafilatura==1.5.0
+bcrypt==4.0.1
+beautifulsoup4==4.11.1
+requests==2.31.0
+plotly==5.13.1
+nltk==3.8.1  # Add this line
