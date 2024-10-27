@@ -39,13 +39,21 @@ def initialize_models(config):
         revision="v0.1.0",
     )
     # Initialize SpaCy NLP Model
+    import spacy
+
     try:
-        import spacy
         nlp = spacy.load("en_core_web_sm")
+        logger.info("Loaded spaCy model successfully.")
+    except OSError:
+        logger.info("spaCy model not found. Downloading...")
+        from spacy.cli import download
+        download("en_core_web_sm")
+        nlp = spacy.load("en_core_web_sm")
+        logger.info("Downloaded and loaded spaCy model successfully.")
     except Exception as e:
-        import spacy.cli
-        spacy.cli.download("en_core_web_sm")
-        nlp = spacy.load("en_core_web_sm")
+        logger.error(f"Failed to load spaCy model: {e}", exc_info=True)
+        st.error("Failed to load spaCy model. Please check logs for more details.")
+        st.stop()
 
     models = {
         'sentiment': sentiment_pipeline,
@@ -71,7 +79,7 @@ def display_results(data, unique_id='', is_nested=False, save_to_history=True):
         st.markdown(f"## {data.get('title', 'Untitled Article')}")
         st.markdown(f"**Date:** {data.get('date', 'N/A')}")
         st.markdown(f"**Analyzed by:** {data.get('username', 'guest')}")
-    
+
         # Overview Metrics in Columns
         col1, col2, col3, col4 = st.columns(4)
         with col1:
@@ -85,17 +93,17 @@ def display_results(data, unique_id='', is_nested=False, save_to_history=True):
                 sentiment_color = "#6c757d"  # Gray
             st.markdown(f"**Sentiment:** <span style='color:{sentiment_color};'>{sentiment_label}</span>", unsafe_allow_html=True)
             st.metric(label="Sentiment Score", value=f"{sentiment_score:.2f}")
-    
+
         with col2:
             bias_count = data.get('bias_score', 0)
             st.markdown("**Bias Count**")
             st.metric(label="Bias Terms Detected", value=f"{int(bias_count)}")
-    
+
         with col3:
             st.markdown("**Propaganda Count**")
             propaganda_count = data.get('propaganda_score', 0)
             st.metric(label="Propaganda Techniques Detected", value=f"{int(propaganda_count)}")
-    
+
         with col4:
             final_score = data.get('final_score', 0.0)
             st.markdown("**Final Score**")
@@ -104,23 +112,23 @@ def display_results(data, unique_id='', is_nested=False, save_to_history=True):
                 value=f"{final_score:.2f}",
                 help="A score out of 100 indicating overall article quality, with higher scores being better. Higher scores reflect positive sentiment and lower levels of bias and propaganda."
             )
-    
+
         st.markdown("---")  # Separator
-    
+
         # Tabs for Different Analysis Sections
         tabs = st.tabs(["Sentiment Analysis", "Bias Detection", "Propaganda Detection"])
-    
+
         # --- Sentiment Analysis Tab ---
         with tabs[0]:
             st.markdown("### Sentiment Analysis")
             st.markdown(f"**Overall Sentiment:** <span style='color:{sentiment_color}'>{sentiment_label}</span>", unsafe_allow_html=True)
             st.write(f"**Sentiment Score:** {sentiment_score:.2f}")
-    
+
         # --- Bias Detection Tab ---
         with tabs[1]:
             st.markdown("### Bias Detection")
             st.write(f"**Bias Count:** {int(bias_count)} bias terms detected.")
-    
+
             if data.get('biased_sentences'):
                 if not is_nested:
                     with st.expander("View Biased Sentences", expanded=False):
@@ -135,12 +143,12 @@ def display_results(data, unique_id='', is_nested=False, save_to_history=True):
                         st.markdown(f"   - **Explanation:** {item['explanation']}")
             else:
                 st.write("No biased sentences detected.")
-    
+
         # --- Propaganda Detection Tab ---
         with tabs[2]:
             st.markdown("### Propaganda Detection")
             st.write(f"**Propaganda Count:** {int(propaganda_count)} propaganda techniques detected.")
-    
+
             if data.get('propaganda_sentences'):
                 if not is_nested:
                     with st.expander("View Propaganda Sentences", expanded=False):
@@ -155,15 +163,15 @@ def display_results(data, unique_id='', is_nested=False, save_to_history=True):
                         st.markdown(f"   - **Explanation:** {item['explanation']}")
             else:
                 st.write("No propaganda techniques detected.")
-    
+
         st.markdown("---")  # Separator
-    
+
         # Only save to history if save_to_history is True
         if save_to_history and st.session_state.get('logged_in', False):
             utils.save_analysis_to_history(data, st.session_state['username'])
             logger.info("Analysis saved to history automatically.")
             st.success("Analysis saved to your history.")
-    
+
             # Provide Download Option for CSV
             csv_data = {
                 'title': data.get('title', 'Untitled'),
@@ -173,9 +181,9 @@ def display_results(data, unique_id='', is_nested=False, save_to_history=True):
                 'bias_count': data.get('bias_score', 0),
                 'propaganda_count': data.get('propaganda_score', 0),
                 'final_score': data.get('final_score', 0.0),
-                'entities': data.get('entities', {}),
-                'biased_sentences': data.get('biased_sentences', []),
-                'propaganda_sentences': data.get('propaganda_sentences', [])
+                'entities': json.dumps(data.get('entities', {})),  # Ensure serialization
+                'biased_sentences': json.dumps(data.get('biased_sentences', [])),  # Ensure serialization
+                'propaganda_sentences': json.dumps(data.get('propaganda_sentences', []))  # Ensure serialization
             }
             df_csv = pd.DataFrame([csv_data])
             csv_buffer = df_csv.to_csv(index=False).encode('utf-8')
@@ -186,7 +194,7 @@ def display_results(data, unique_id='', is_nested=False, save_to_history=True):
                 mime='text/csv',
                 key=f"download_analysis_csv_{unique_id}"
             )
-    
+
         # --- Feedback Section with Unique Key ---
         if not is_nested:
             st.markdown("---")
