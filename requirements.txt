@@ -3,9 +3,9 @@ numpy==1.23.5
 pandas==1.5.3
 transformers==4.35.0
 torch==2.0.1
-spacy==3.8.0
-thinc==8.0.17
-Cython==0.29.32
+spacy==3.6.1
+thinc==8.1.13
+Cython>=0.29.36
 PyYAML==6.0
 trafilatura==1.5.0
 bcrypt==4.0.1
