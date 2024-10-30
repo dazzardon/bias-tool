@@ -5,19 +5,17 @@ import streamlit as st
 import datetime
 import os
 import json
+import re
+import requests
+from bs4 import BeautifulSoup
 import pandas as pd
+import yaml
+import bcrypt
 from transformers import pipeline, BertTokenizerFast
-from model import BertForTokenAndSequenceJointClassification
-import utils
-import analysis
-from auth import (
-    is_valid_username,
-    is_strong_password,
-    hash_password,
-    verify_password,
-    load_users,
-    save_users
-)
+import torch
+from torch import nn
+import spacy
+import plotly.express as px
 
 # --- Configure Logging ---
 logging.basicConfig(
@@ -28,7 +26,463 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# --- Initialize Models ---
+# --- Configuration Loading ---
+def load_config(config_path='config.yaml'):
+    try:
+        with open(config_path, 'r') as f:
+            return yaml.safe_load(f)
+    except Exception as e:
+        logger.error(f"Error loading config file: {e}")
+        return None
+
+config = load_config()
+if not config:
+    st.error("Configuration file not found or invalid.")
+    st.stop()
+
+# --- User Management Functions ---
+def hash_password(password):
+    try:
+        hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        return hashed.decode('utf-8')
+    except Exception as e:
+        logger.error(f"Error hashing password: {e}")
+        return None
+
+def verify_password(stored_password, provided_password):
+    try:
+        return bcrypt.checkpw(provided_password.encode('utf-8'), stored_password.encode('utf-8'))
+    except Exception as e:
+        logger.error(f"Error verifying password: {e}")
+        return False
+
+def is_strong_password(password):
+    if len(password) < 8:
+        return False
+    if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
+        return False
+    return True
+
+def is_valid_username(username):
+    return re.match(r'^[A-Za-z0-9]{3,30}$', username) is not None
+
+def load_users(users_path='users.json'):
+    if not os.path.exists(users_path):
+        with open(users_path, 'w') as f:
+            json.dump([], f)
+        logger.info("Created new users.json file.")
+    try:
+        with open(users_path, 'r') as f:
+            users = json.load(f)
+        logger.info("Users loaded successfully.")
+        return users
+    except Exception as e:
+        logger.error(f"Error loading users: {e}")
+        return []
+
+def save_users(users, users_path='users.json'):
+    try:
+        with open(users_path, 'w') as f:
+            json.dump(users, f, indent=4)
+        logger.info("Users saved successfully.")
+    except Exception as e:
+        logger.error(f"Error saving users: {e}")
+
+# --- Utility Functions ---
+def is_valid_url(url):
+    return re.match(r'^(http|https)://', url) is not None
+
+def sanitize_text(text):
+    return text.strip()
+
+def save_analysis_to_history(analysis_data, username):
+    history_file = f'history_{username}.json'
+    history = []
+    try:
+        if os.path.exists(history_file):
+            with open(history_file, 'r') as file:
+                history = json.load(file)
+    except json.JSONDecodeError:
+        logger.error(f"{history_file} is corrupted. Resetting the file.")
+        history = []
+    except Exception as e:
+        logger.error(f"Error loading history: {e}")
+        history = []
+
+    history.append(analysis_data)
+    try:
+        with open(history_file, 'w') as file:
+            json.dump(history, file, indent=4)
+        logger.info("Analysis saved to history.")
+    except Exception as e:
+        logger.error(f"Error saving history: {e}")
+
+def load_user_history(username):
+    history_file = f'history_{username}.json'
+    if not os.path.exists(history_file):
+        return []
+    try:
+        with open(history_file, 'r') as file:
+            return json.load(file)
+    except json.JSONDecodeError:
+        logger.error(f"{history_file} is corrupted. Resetting the file.")
+        return []
+    except Exception as e:
+        logger.error(f"Error loading history: {e}")
+        return []
+
+def fetch_article_text(url):
+    try:
+        headers = {
+            "User-Agent": "Mozilla/5.0 (compatible; MediaBiasTool/1.0; +https://example.com/bias-tool)"
+        }
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()
+        html_content = response.text
+
+        soup = BeautifulSoup(html_content, 'html.parser')
+
+        article_text = ''
+
+        article_tags = [
+            {'name': 'article'},
+            {'name': 'div', 'class_': 'article-content'},
+            {'name': 'div', 'class_': 'entry-content'},
+            {'name': 'div', 'class_': 'post-content'},
+            {'name': 'div', 'id': 'article-body'},
+            {'name': 'div', 'class_': 'story-body'},
+            {'name': 'div', 'class_': 'main-content'},
+            {'name': 'div', 'class_': 'content'},
+        ]
+
+        for tag in article_tags:
+            elements = soup.find_all(tag.get('name'), class_=tag.get('class_'), id=tag.get('id'))
+            if elements:
+                for element in elements:
+                    article_text += element.get_text(separator=' ', strip=True) + ' '
+                if article_text:
+                    break
+
+        if not article_text:
+            paragraphs = soup.find_all('p')
+            for p in paragraphs:
+                article_text += p.get_text(separator=' ', strip=True) + ' '
+
+        article_text = article_text.strip()
+        return article_text if article_text else None
+    except Exception as e:
+        logger.error(f"Error fetching article text from {url}: {e}")
+        return None
+
+# --- Analysis Functions ---
+def split_text_into_chunks(text, max_chars=500):
+    try:
+        sentences = re.split(r'(?<=[.!?]) +', text)
+        chunks = []
+        current_chunk = ""
+        for sentence in sentences:
+            if len(current_chunk) + len(sentence) + 1 <= max_chars:
+                current_chunk += " " + sentence if current_chunk else sentence
+            else:
+                if current_chunk:
+                    chunks.append(current_chunk.strip())
+                current_chunk = sentence
+        if current_chunk:
+            chunks.append(current_chunk.strip())
+        return chunks
+    except Exception as e:
+        logger.error(f"Error splitting text into chunks: {e}", exc_info=True)
+        return [text.strip()]
+
+class BertForTokenAndSequenceJointClassification(nn.Module):
+    def __init__(self, config):
+        super().__init__()
+        self.num_token_labels = config.get('num_token_labels', 15)
+        self.num_sequence_labels = 2  # Propaganda or Non-Propaganda
+
+        self.bert = BertModel.from_pretrained(config.get('model_name', 'bert-base-cased'))
+        self.dropout = nn.Dropout(config.get('hidden_dropout_prob', 0.1))
+        self.token_classifier = nn.Linear(self.bert.config.hidden_size, self.num_token_labels)
+        self.sequence_classifier = nn.Linear(self.bert.config.hidden_size, self.num_sequence_labels)
+
+        # Label mappings
+        self.token_tags = {
+            0: 'O',
+            1: 'Appeal_to_Authority',
+            2: 'Appeal_to_fear-prejudice',
+            3: 'Bandwagon,Reductio_ad_hitlerum',
+            4: 'Black-and-White_Fallacy',
+            5: 'Causal_Oversimplification',
+            6: 'Doubt',
+            7: 'Exaggeration,Minimisation',
+            8: 'Flag-Waving',
+            9: 'Loaded_Language',
+            10: 'Name_Calling,Labeling',
+            11: 'Repetition',
+            12: 'Slogans',
+            13: 'Thought-terminating_Cliches',
+            14: 'Whataboutism,Straw_Men,Red_Herring'
+        }
+
+        self.sequence_tags = {
+            0: 'Non-Propaganda',
+            1: 'Propaganda'
+        }
+
+    def forward(self, input_ids=None, attention_mask=None, token_type_ids=None):
+        outputs = self.bert(
+            input_ids,
+            attention_mask=attention_mask,
+            token_type_ids=token_type_ids,
+            return_dict=True
+        )
+        sequence_output = outputs.last_hidden_state[:, 0, :]  # [CLS] token
+        sequence_output = self.dropout(sequence_output)
+        sequence_logits = self.sequence_classifier(sequence_output)
+
+        token_output = outputs.last_hidden_state
+        token_output = self.dropout(token_output)
+        token_logits = self.token_classifier(token_output)
+
+        return {
+            'sequence_logits': sequence_logits,
+            'token_logits': token_logits
+        }
+
+def describe_propaganda_term(term):
+    descriptions = {
+        "Appeal To Authority": "using references to influential people to support an argument without substantial evidence",
+        "Appeal_to_fear-prejudice": "playing on people's fears or prejudices to influence their opinion",
+        "Bandwagon,Reductio_ad_hitlerum": "suggesting that something is good because many people do it or comparing opponents to Hitler",
+        "Black-and-White_Fallacy": "presenting only two options when more exist",
+        "Causal_Oversimplification": "reducing a complex issue to a single cause",
+        "Doubt": "casting doubt on an idea without sufficient justification",
+        "Exaggeration,Minimisation": "making something seem better or worse than it is or downplaying the significance",
+        "Flag-Waving": "appealing to patriotism or nationalism to support an argument",
+        "Loaded_Language": "using emotionally charged words to influence opinion",
+        "Name_Calling,Labeling": "attaching negative labels to individuals or groups without evidence",
+        "Repetition": "repeating a message multiple times to reinforce it",
+        "Slogans": "using catchy phrases to simplify complex ideas",
+        "Thought-Terminating_Cliches": "using clichés to end debate or discussion",
+        "Whataboutism,Straw_Men,Red_Herring": "distracting from the main issue with irrelevant points or misrepresenting an opponent's argument"
+    }
+    return descriptions.get(term, "a propaganda technique")
+
+def explain_bias(terms):
+    explanations = [f"The term '{term}' indicates potential bias." for term in terms]
+    return " ".join(explanations)
+
+def explain_propaganda(techniques):
+    explanations = []
+    for term in techniques:
+        description = describe_propaganda_term(term)
+        explanations.append(f"The text involves {description}.")
+    return " ".join(explanations)
+
+def calculate_final_score(sentiment_score, bias_count, propaganda_count, config):
+    try:
+        sentiment_weight = config.get('scoring', {}).get('sentiment_weight', 0.4)
+        bias_weight = config.get('scoring', {}).get('bias_weight', 0.3)
+        propaganda_weight = config.get('scoring', {}).get('propaganda_weight', 0.3)
+
+        # Normalize sentiment_score from -1 to 1 to a 0 to 100 scale
+        sentiment_subscore = ((sentiment_score + 1) / 2) * 100
+
+        # Cap counts at max values to prevent excessive penalties
+        max_bias = config.get('scoring', {}).get('max_bias', 20)
+        max_propaganda = config.get('scoring', {}).get('max_propaganda', 20)
+        bias_penalty = min(bias_count / max_bias, 1) * 100 if max_bias > 0 else 0
+        propaganda_penalty = min(propaganda_count / max_propaganda, 1) * 100 if max_propaganda > 0 else 0
+
+        # Calculate final score
+        final_score = (
+            sentiment_subscore * sentiment_weight +
+            (100 - bias_penalty) * bias_weight +
+            (100 - propaganda_penalty) * propaganda_weight
+        )
+        final_score = max(min(final_score, 100), 0)
+        final_score = round(final_score, 2)
+        logger.info(f"Final Score Calculated: {final_score}")
+        return final_score
+    except Exception as e:
+        logger.error(f"Error calculating final score: {e}", exc_info=True)
+        return 0.0
+
+def perform_analysis(article_text, title, features, models, config, bias_terms=None):
+    if not models:
+        logger.error("Models are not loaded. Cannot perform analysis.")
+        return None
+
+    analysis_data = {
+        'title': title if title else 'Untitled',
+        'date': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        'sentiment_score': 0.0,
+        'sentiment_label': 'Neutral',
+        'bias_score': 0,
+        'propaganda_score': 0,
+        'final_score': 0.0,
+        'entities': {},
+        'biased_sentences': [],
+        'propaganda_sentences': [],
+        'username': 'guest'  # Default username
+    }
+
+    total_sentiments = []
+    bias_count = 0
+    propaganda_count = 0
+    all_biased_sentences = []
+    all_propaganda_sentences = []
+
+    chunks = split_text_into_chunks(article_text, max_chars=500)
+
+    for idx, chunk in enumerate(chunks, 1):
+        logger.info(f"Analyzing chunk {idx}/{len(chunks)}")
+        # Sentiment Analysis
+        if "Sentiment Analysis" in features:
+            try:
+                sentiments = models['sentiment'](chunk)
+                for sentiment in sentiments:
+                    label = sentiment['label'].upper()
+                    score = sentiment['score']
+                    if label == 'NEGATIVE':
+                        score = -score
+                    elif label == 'POSITIVE':
+                        score = score
+                    else:
+                        score = 0
+                    total_sentiments.append(score)
+            except Exception as e:
+                logger.error(f"Error during sentiment analysis: {e}")
+
+        # Bias Detection
+        if "Bias Detection" in features:
+            try:
+                terms = bias_terms if bias_terms else config.get('bias_terms', [])
+                detected = [term for term in terms if re.search(r'\b' + re.escape(term) + r'\b', chunk, re.IGNORECASE)]
+                if detected:
+                    unique_terms = set(detected)
+                    bias_count += len(unique_terms)
+                    biased_sentence = {
+                        'sentence': chunk,
+                        'detected_terms': list(unique_terms),
+                        'explanation': explain_bias(list(unique_terms))
+                    }
+                    all_biased_sentences.append(biased_sentence)
+                    logger.info(f"Bias detected in chunk {idx}: {unique_terms}")
+            except Exception as e:
+                logger.error(f"Error during bias detection: {e}")
+
+        # Propaganda Detection
+        if "Propaganda Detection" in features:
+            try:
+                propaganda_model = models.get('propaganda_model')
+                propaganda_tokenizer = models.get('propaganda_tokenizer')
+                if propaganda_model is None or propaganda_tokenizer is None:
+                    logger.error("Propaganda model or tokenizer not loaded.")
+                else:
+                    inputs = propaganda_tokenizer.encode_plus(
+                        chunk,
+                        return_tensors="pt",
+                        truncation=True,
+                        max_length=512,
+                        padding=True
+                    )
+                    outputs = propaganda_model(**inputs)
+
+                    # Sequence Classification
+                    sequence_logits = outputs['sequence_logits']
+                    sequence_class_index = torch.argmax(sequence_logits, dim=-1)
+                    sequence_class = propaganda_model.sequence_tags.get(sequence_class_index.item(), 'Non-Propaganda')
+
+                    sequence_confidence = torch.softmax(sequence_logits, dim=-1)[0][sequence_class_index].item()
+
+                    techniques = set()
+
+                    # Define a confidence threshold to ensure accurate detection
+                    confidence_threshold = 0.7
+
+                    if sequence_class.lower() == 'propaganda' and sequence_confidence > confidence_threshold:
+                        # Token Classification
+                        token_logits = outputs['token_logits']
+                        token_class_indices = torch.argmax(token_logits, dim=-1)
+
+                        tokens = propaganda_tokenizer.convert_ids_to_tokens(inputs['input_ids'][0])
+                        attention_mask = inputs['attention_mask'][0]
+
+                        for token, tag_idx, mask in zip(tokens, token_class_indices[0], attention_mask):
+                            if mask == 1 and token not in ["[CLS]", "[SEP]", "[PAD]"]:
+                                tag = propaganda_model.token_tags.get(tag_idx.item(), 'O')
+                                if tag != 'O':
+                                    normalized_tag = tag.replace('_', ' ').title()
+                                    techniques.add(normalized_tag)
+
+                        if techniques:
+                            propaganda_count += len(techniques)
+                            propaganda_sentence = {
+                                'sentence': chunk,
+                                'detected_terms': list(techniques),
+                                'explanation': explain_propaganda(list(techniques))
+                            }
+                            all_propaganda_sentences.append(propaganda_sentence)
+                            logger.info(f"Propaganda techniques detected in chunk {idx}: {techniques}")
+                        else:
+                            propaganda_count += 1
+                            propaganda_sentence = {
+                                'sentence': chunk,
+                                'detected_terms': [sequence_class],
+                                'explanation': explain_propaganda([sequence_class]),
+                            }
+                            all_propaganda_sentences.append(propaganda_sentence)
+                            logger.info(f"General propaganda detected in chunk {idx}: {sequence_class}")
+            except Exception as e:
+                logger.error(f"Error during propaganda detection: {e}")
+
+        # Entity Detection
+        if "Pattern Detection" in features:
+            try:
+                nlp = models['nlp']
+                doc = nlp(chunk)
+                for ent in doc.ents:
+                    entities = analysis_data['entities']
+                    if ent.text in entities:
+                        entities[ent.text]['types'].add(ent.label_)
+                        entities[ent.text]['count'] += 1
+                    else:
+                        entities[ent.text] = {
+                            'types': set([ent.label_]),
+                            'count': 1
+                        }
+            except Exception as e:
+                logger.error(f"Error during entity extraction: {e}")
+
+    # Aggregate Sentiment Scores
+    if total_sentiments:
+        average_sentiment = sum(total_sentiments) / len(total_sentiments)
+        analysis_data['sentiment_score'] = average_sentiment
+        if average_sentiment >= 0.05:
+            analysis_data['sentiment_label'] = 'Positive'
+        elif average_sentiment <= -0.05:
+            analysis_data['sentiment_label'] = 'Negative'
+        else:
+            analysis_data['sentiment_label'] = 'Neutral'
+        logger.info(f"Aggregated Sentiment: {analysis_data['sentiment_label']} with average score {average_sentiment}")
+
+    analysis_data['bias_score'] = bias_count
+    analysis_data['propaganda_score'] = propaganda_count
+    analysis_data['biased_sentences'] = all_biased_sentences
+    analysis_data['propaganda_sentences'] = all_propaganda_sentences
+
+    # Final Score Calculation
+    analysis_data['final_score'] = calculate_final_score(
+        analysis_data['sentiment_score'],
+        analysis_data['bias_score'],
+        analysis_data['propaganda_score'],
+        config
+    )
+
+    return analysis_data
+
+# --- Model Initialization ---
 @st.cache_resource
 def initialize_models(config):
     # Initialize Sentiment Analysis Model
@@ -39,39 +493,37 @@ def initialize_models(config):
         device=-1  # Use CPU
     )
     # Initialize Propaganda Detection Model
-    propaganda_tokenizer = BertTokenizerFast.from_pretrained('bert-base-cased')
-    propaganda_model = BertForTokenAndSequenceJointClassification.from_pretrained(
-        "QCRI/PropagandaTechniquesAnalysis-en-BERT",
-        revision="v0.1.0",
-    )
+    try:
+        tokenizer = BertTokenizerFast.from_pretrained(config['models']['propaganda_model_tokenizer'])
+        propaganda_model = BertForTokenAndSequenceJointClassification(config['models']['propaganda_model_config'])
+        propaganda_model.load_state_dict(torch.load(config['models']['propaganda_model_path'], map_location=torch.device('cpu')))
+        propaganda_model.eval()
+    except Exception as e:
+        logger.error(f"Error loading propaganda model: {e}")
+        tokenizer = None
+        propaganda_model = None
+
     # Initialize SpaCy NLP Model
     try:
-        import spacy
         nlp = spacy.load("en_core_web_sm")
     except Exception as e:
-        import spacy.cli
-        spacy.cli.download("en_core_web_sm")
-        nlp = spacy.load("en_core_web_sm")
+        logger.error(f"Error loading SpaCy model: {e}")
+        try:
+            spacy.cli.download("en_core_web_sm")
+            nlp = spacy.load("en_core_web_sm")
+        except Exception as e:
+            logger.error(f"Failed to download SpaCy model: {e}")
+            nlp = None
 
     models = {
         'sentiment': sentiment_pipeline,
         'propaganda_model': propaganda_model,
-        'propaganda_tokenizer': propaganda_tokenizer,
+        'propaganda_tokenizer': tokenizer,
         'nlp': nlp
     }
     return models
 
-# Load Configuration
-config = utils.load_config('config.yaml')
-if not config:
-    st.error("Configuration file not found or invalid.")
-    st.stop()
-
-# Load Models
-models = initialize_models(config)
-
-# --- Helper Functions ---
-
+# --- Helper Functions for Display ---
 def display_results(data, unique_id='', is_nested=False, save_to_history=True):
     with st.container():
         st.markdown(f"## {data.get('title', 'Untitled Article')}")
@@ -168,7 +620,7 @@ def display_results(data, unique_id='', is_nested=False, save_to_history=True):
         if save_to_history and st.session_state.get('logged_in', False):
             analysis_data = data.copy()
             analysis_data['username'] = st.session_state['username']
-            utils.save_analysis_to_history(analysis_data, st.session_state['username'])
+            save_analysis_to_history(analysis_data, st.session_state['username'])
             logger.info("Analysis saved to history automatically.")
             st.success("Analysis saved to your history.")
 
@@ -232,9 +684,8 @@ def display_results(data, unique_id='', is_nested=False, save_to_history=True):
                 else:
                     st.warning("Please enter your feedback before submitting.")
 
-# --- User Management Functions ---
-
-def register_user(config):
+# --- User Interface Functions ---
+def register_user():
     st.title("Register")
     st.write("Create a new account to access personalized features.")
 
@@ -269,14 +720,14 @@ def register_user(config):
                 "username": username,
                 "password": hashed_pwd,
                 "preferences": {},
-                "bias_terms": config['bias_terms']
+                "bias_terms": config.get('bias_terms', [])
             }
             users.append(new_user)
             save_users(users)
             st.success("Registration successful. You can now log in.")
             logger.info(f"New user registered: {username}")
 
-def login_user(config):
+def login_user():
     st.title("Login")
     st.write("Access your account to view history and customize settings.")
 
@@ -308,8 +759,7 @@ def logout_user():
     st.session_state['bias_terms'] = []
     st.sidebar.success("Logged out successfully.")
 
-# --- Analysis Functions ---
-
+# --- Analysis Interface Functions ---
 def single_article_analysis(features, config, models):
     st.header("Single Article Analysis")
     st.write("Enter the article URL or paste the article text below.")
@@ -345,11 +795,11 @@ def single_article_analysis(features, config, models):
     if st.button("Analyze", key="analyze_single_article"):
         if input_type == 'Enter URL':
             if url:
-                if utils.is_valid_url(url):
+                if is_valid_url(url):
                     with st.spinner('Fetching the article...'):
-                        article_text_fetched = utils.fetch_article_text(url)
+                        article_text_fetched = fetch_article_text(url)
                         if article_text_fetched:
-                            sanitized_text = utils.sanitize_text(article_text_fetched)
+                            sanitized_text = sanitize_text(article_text_fetched)
                             st.success("Article text fetched successfully.")
                             article_text = sanitized_text  # Use sanitized text for analysis
                         else:
@@ -365,11 +815,11 @@ def single_article_analysis(features, config, models):
             if not article_text.strip():
                 st.error("Please paste the article text.")
                 return
-            sanitized_text = utils.sanitize_text(article_text)
+            sanitized_text = sanitize_text(article_text)
             article_text = sanitized_text
 
         with st.spinner('Performing analysis...'):
-            analysis_data = analysis.perform_analysis(
+            analysis_data = perform_analysis(
                 article_text=article_text,
                 title=title,
                 features=features,
@@ -385,9 +835,8 @@ def single_article_analysis(features, config, models):
         if analysis_data:
             st.success("Analysis completed successfully.")
             display_results(analysis_data, unique_id=f"single_{title}_{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}")
-        else:
-            st.error("Failed to perform analysis on the provided article.")
 
+# --- Comparative Analysis Function ---
 def comparative_analysis(features, config, models):
     st.header("Comparative Analysis")
     st.write("Enter URLs or paste texts of multiple articles below for comparison.")
@@ -436,11 +885,11 @@ def comparative_analysis(features, config, models):
             st.write(f"### Analyzing Article {idx+1}")
             if article['input_type'] == 'Enter URL':
                 if article['url']:
-                    if utils.is_valid_url(article['url']):
+                    if is_valid_url(article['url']):
                         with st.spinner(f'Fetching and analyzing Article {idx+1}...'):
-                            article_text_fetched = utils.fetch_article_text(article['url'])
+                            article_text_fetched = fetch_article_text(article['url'])
                             if article_text_fetched:
-                                sanitized_text = utils.sanitize_text(article_text_fetched)
+                                sanitized_text = sanitize_text(article_text_fetched)
                                 st.success(f"Article {idx+1} text fetched successfully.")
                                 article_text = sanitized_text  # Use sanitized text for analysis
                             else:
@@ -454,14 +903,14 @@ def comparative_analysis(features, config, models):
                     continue
             else:
                 if article['text'].strip():
-                    sanitized_text = utils.sanitize_text(article['text'])
+                    sanitized_text = sanitize_text(article['text'])
                     article_text = sanitized_text
                 else:
                     st.error(f"Please paste the text for Article {idx+1}.")
                     continue
 
             with st.spinner(f'Performing analysis on Article {idx+1}...'):
-                analysis_data = analysis.perform_analysis(
+                analysis_data = perform_analysis(
                     article_text=article_text,
                     title=article['title'],
                     features=features,
@@ -507,10 +956,11 @@ def comparative_analysis(features, config, models):
                 key=f"download_comparative_csv_{timestamp}"
             )
 
-def display_history(features, config, models):
+# --- History Display Function ---
+def display_history():
     st.header("Your Analysis History")
     username = st.session_state.get('username', '')
-    history = utils.load_user_history(username)
+    history = load_user_history(username)
 
     if not history:
         st.info("No history available.")
@@ -545,7 +995,8 @@ def display_history(features, config, models):
                 continue
             display_results(entry_dict, unique_id=unique_id, is_nested=True, save_to_history=False)
 
-def settings_page(config, models):
+# --- Settings Page Function ---
+def settings_page():
     st.header("Settings")
     st.write("Customize your analysis settings.")
 
@@ -603,7 +1054,7 @@ def settings_page(config, models):
 
     # Button to reset bias terms to default
     if st.button("Reset Bias Terms to Default", key="reset_bias_terms"):
-        st.session_state['bias_terms'] = config['bias_terms'].copy()
+        st.session_state['bias_terms'] = config.get('bias_terms', []).copy()
         # Save to user's preferences in the JSON file
         users = load_users()
         for user in users:
@@ -617,6 +1068,7 @@ def settings_page(config, models):
     st.markdown("### Note:")
     st.markdown("Use the **'Add a New Bias Term'** form to introduce new terms. You can edit existing terms in the text area above. To reset to the default bias terms, click the **'Reset Bias Terms to Default'** button.")
 
+# --- Help Page Function ---
 def help_feature():
     st.header("Help")
     st.write("""
@@ -651,7 +1103,6 @@ def help_feature():
     """)
 
 # --- Main Function ---
-
 def main():
     # Initialize session state variables if they don't exist
     if 'logged_in' not in st.session_state:
@@ -676,17 +1127,20 @@ def main():
         )
     st.sidebar.markdown("---")
 
+    # Initialize Models
+    models = initialize_models(config)
+
     # Page Routing
     if page == "Login":
         if st.session_state['logged_in']:
             st.sidebar.info(f"Already logged in as **{st.session_state['username']}**.")
         else:
-            login_user(config)
+            login_user()
     elif page == "Register":
         if st.session_state['logged_in']:
             st.sidebar.info(f"Already registered as **{st.session_state['username']}**.")
         else:
-            register_user(config)
+            register_user()
     elif page == "Single Article Analysis":
         if not st.session_state['logged_in']:
             st.warning("Please log in to access this page.")
@@ -701,12 +1155,12 @@ def main():
         if not st.session_state['logged_in']:
             st.warning("Please log in to access this page.")
         else:
-            display_history(["Sentiment Analysis", "Bias Detection", "Propaganda Detection"], config, models)
+            display_history()
     elif page == "Settings":
         if not st.session_state['logged_in']:
             st.warning("Please log in to access this page.")
         else:
-            settings_page(config, models)
+            settings_page()
     elif page == "Help":
         help_feature()
 
