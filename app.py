@@ -3,15 +3,21 @@
 import logging
 import streamlit as st
 import datetime
-import re
 import os
 import json
 import pandas as pd
-import plotly.express as px
 from transformers import pipeline, BertTokenizerFast
-from model import BertForTokenAndSequenceJointClassification  # Ensure this is correctly imported
-import utils  # Ensure utils.py is in the same directory
-import analysis  # Ensure analysis.py is in the same directory
+from model import BertForTokenAndSequenceJointClassification
+import utils
+import analysis
+from auth import (
+    is_valid_username,
+    is_strong_password,
+    hash_password,
+    verify_password,
+    load_users,
+    save_users
+)
 
 # --- Configure Logging ---
 logging.basicConfig(
@@ -39,21 +45,13 @@ def initialize_models(config):
         revision="v0.1.0",
     )
     # Initialize SpaCy NLP Model
-    import spacy
-
     try:
+        import spacy
         nlp = spacy.load("en_core_web_sm")
-        logger.info("Loaded spaCy model successfully.")
-    except OSError:
-        logger.info("spaCy model not found. Downloading...")
-        from spacy.cli import download
-        download("en_core_web_sm")
-        nlp = spacy.load("en_core_web_sm")
-        logger.info("Downloaded and loaded spaCy model successfully.")
     except Exception as e:
-        logger.error(f"Failed to load spaCy model: {e}", exc_info=True)
-        st.error("Failed to load spaCy model. Please check logs for more details.")
-        st.stop()
+        import spacy.cli
+        spacy.cli.download("en_core_web_sm")
+        nlp = spacy.load("en_core_web_sm")
 
     models = {
         'sentiment': sentiment_pipeline,
@@ -168,7 +166,9 @@ def display_results(data, unique_id='', is_nested=False, save_to_history=True):
 
         # Only save to history if save_to_history is True
         if save_to_history and st.session_state.get('logged_in', False):
-            utils.save_analysis_to_history(data, st.session_state['username'])
+            analysis_data = data.copy()
+            analysis_data['username'] = st.session_state['username']
+            utils.save_analysis_to_history(analysis_data, st.session_state['username'])
             logger.info("Analysis saved to history automatically.")
             st.success("Analysis saved to your history.")
 
@@ -181,9 +181,9 @@ def display_results(data, unique_id='', is_nested=False, save_to_history=True):
                 'bias_count': data.get('bias_score', 0),
                 'propaganda_count': data.get('propaganda_score', 0),
                 'final_score': data.get('final_score', 0.0),
-                'entities': json.dumps(data.get('entities', {})),  # Ensure serialization
-                'biased_sentences': json.dumps(data.get('biased_sentences', [])),  # Ensure serialization
-                'propaganda_sentences': json.dumps(data.get('propaganda_sentences', []))  # Ensure serialization
+                'entities': data.get('entities', {}),
+                'biased_sentences': data.get('biased_sentences', []),
+                'propaganda_sentences': data.get('propaganda_sentences', [])
             }
             df_csv = pd.DataFrame([csv_data])
             csv_buffer = df_csv.to_csv(index=False).encode('utf-8')
@@ -248,20 +248,20 @@ def register_user(config):
             if not username or not password or not password_confirm:
                 st.error("Please fill out all fields.")
                 return
-            if not utils.is_valid_username(username):
+            if not is_valid_username(username):
                 st.error("Username must be 3-30 characters long and contain only letters and numbers.")
                 return
             if password != password_confirm:
                 st.error("Passwords do not match.")
                 return
-            if not utils.is_strong_password(password):
+            if not is_strong_password(password):
                 st.error("Password must be at least 8 characters long and include at least one special character.")
                 return
-            users = utils.load_users()
+            users = load_users()
             if any(user['username'].lower() == username.lower() for user in users):
                 st.error("Username already exists. Please choose a different one.")
                 return
-            hashed_pwd = utils.hash_password(password)
+            hashed_pwd = hash_password(password)
             if not hashed_pwd:
                 st.error("Error hashing password. Please try again.")
                 return
@@ -272,7 +272,7 @@ def register_user(config):
                 "bias_terms": config['bias_terms']
             }
             users.append(new_user)
-            utils.save_users(users)
+            save_users(users)
             st.success("Registration successful. You can now log in.")
             logger.info(f"New user registered: {username}")
 
@@ -289,9 +289,9 @@ def login_user(config):
             if not username or not password:
                 st.error("Please enter both username and password.")
                 return
-            users = utils.load_users()
+            users = load_users()
             user = next((user for user in users if user['username'].lower() == username.lower()), None)
-            if user and utils.verify_password(user['password'], password):
+            if user and verify_password(user['password'], password):
                 st.session_state['logged_in'] = True
                 st.session_state['username'] = user['username']
                 st.session_state['bias_terms'] = user.get('bias_terms', config.get('bias_terms', []))
@@ -377,6 +377,10 @@ def single_article_analysis(features, config, models):
                 config=config,
                 bias_terms=st.session_state.get('bias_terms', config.get('bias_terms', []))
             )
+            if st.session_state.get('logged_in', False):
+                analysis_data['username'] = st.session_state['username']
+            else:
+                analysis_data['username'] = 'guest'
 
         if analysis_data:
             st.success("Analysis completed successfully.")
@@ -465,6 +469,10 @@ def comparative_analysis(features, config, models):
                     config=config,
                     bias_terms=st.session_state.get('bias_terms', config.get('bias_terms', []))
                 )
+                if st.session_state.get('logged_in', False):
+                    analysis_data['username'] = st.session_state['username']
+                else:
+                    analysis_data['username'] = 'guest'
 
             if analysis_data:
                 st.success(f"Analysis completed for Article {idx+1}.")
@@ -584,12 +592,12 @@ def settings_page(config, models):
                 seen.add(lower_term)
         st.session_state['bias_terms'] = unique_terms
         # Save to user's preferences in the JSON file
-        users = utils.load_users()
+        users = load_users()
         for user in users:
             if user['username'].lower() == st.session_state['username'].lower():
                 user['bias_terms'] = st.session_state['bias_terms']
                 break
-        utils.save_users(users)
+        save_users(users)
         st.success("Bias terms updated successfully.")
         logger.info("Updated bias terms list.")
 
@@ -597,12 +605,12 @@ def settings_page(config, models):
     if st.button("Reset Bias Terms to Default", key="reset_bias_terms"):
         st.session_state['bias_terms'] = config['bias_terms'].copy()
         # Save to user's preferences in the JSON file
-        users = utils.load_users()
+        users = load_users()
         for user in users:
             if user['username'].lower() == st.session_state['username'].lower():
                 user['bias_terms'] = st.session_state['bias_terms']
                 break
-        utils.save_users(users)
+        save_users(users)
         st.success("Bias terms have been reset to default.")
         logger.info("Reset bias terms list.")
 
