@@ -1,18 +1,15 @@
-# Core Dependencies
+pip>=24.3.1
+setuptools>=68.0.0
+
 streamlit==1.25.0
 numpy==1.23.5
 pandas==1.5.3
 transformers==4.35.0
-torch==2.0.1
+torch==1.13.1
 spacy==3.6.1
 PyYAML==6.0
 bcrypt==4.0.1
 beautifulsoup4==4.12.2
 requests==2.31.0
 plotly==5.13.1
-
-# Additional Dependencies
 en-core-web-sm==3.6.0
-
-# Ensure setuptools is up-to-date to avoid distutils issues
-setuptools>=68.0.0
