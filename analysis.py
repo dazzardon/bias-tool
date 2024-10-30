@@ -1,66 +1,11 @@
 # analysis.py
 
 import logging
-import spacy
-from transformers import pipeline, BertTokenizerFast
-from model import BertForTokenAndSequenceJointClassification
-import torch
 import datetime
 import re
-import streamlit as st
+import torch
 
 logger = logging.getLogger(__name__)
-
-@st.cache_resource
-def load_models(config):
-    """
-    Load and return the necessary models for analysis.
-    """
-    try:
-        # Load Sentiment Analysis Model
-        logger.info("Loading Sentiment Analysis Model...")
-        sentiment_pipeline = pipeline(
-            "sentiment-analysis",
-            model=config['models']['sentiment_model'],
-            tokenizer=config['models']['sentiment_model'],
-            device=-1  # Use CPU
-        )
-        logger.info("Sentiment Analysis Model loaded successfully.")
-
-        # Load SpaCy NLP Model
-        logger.info("Loading SpaCy NLP Model...")
-        try:
-            nlp = spacy.load("en_core_web_sm")
-        except OSError:
-            logger.info("SpaCy model not found. Downloading 'en_core_web_sm'...")
-            spacy.cli.download("en_core_web_sm")
-            nlp = spacy.load("en_core_web_sm")
-        logger.info("SpaCy NLP Model loaded successfully.")
-
-        # Load Bias Terms
-        bias_terms = config.get('bias_terms', [])
-        logger.info(f"Bias terms loaded from config: {bias_terms}")
-
-        # Load the Propaganda Detection Model
-        logger.info("Loading Propaganda Detection Model (QCRI)...")
-        propaganda_tokenizer = BertTokenizerFast.from_pretrained('bert-base-cased')
-        propaganda_model = BertForTokenAndSequenceJointClassification.from_pretrained(
-            "QCRI/PropagandaTechniquesAnalysis-en-BERT",
-            revision="v0.1.0",
-        )
-        logger.info("Propaganda Detection Model loaded successfully.")
-
-        logger.info("All models loaded successfully.")
-        return {
-            'sentiment': sentiment_pipeline,
-            'propaganda_model': propaganda_model,
-            'propaganda_tokenizer': propaganda_tokenizer,
-            'nlp': nlp,
-            'bias_terms': bias_terms,
-        }
-    except Exception as e:
-        logger.error(f"Error loading models: {e}", exc_info=True)
-        return None
 
 def split_text_into_chunks(text, max_chars=500):
     """
@@ -105,7 +50,7 @@ def perform_analysis(article_text, title, features, models, config, bias_terms=N
         'entities': {},
         'biased_sentences': [],
         'propaganda_sentences': [],
-        'username': st.session_state.get('username', 'guest')
+        'username': 'guest'  # Default username
     }
 
     total_sentiments = []
@@ -117,6 +62,7 @@ def perform_analysis(article_text, title, features, models, config, bias_terms=N
     chunks = split_text_into_chunks(article_text, max_chars=500)
 
     for idx, chunk in enumerate(chunks, 1):
+        logger.info(f"Analyzing chunk {idx}/{len(chunks)}")
         # Sentiment Analysis
         if "Sentiment Analysis" in features:
             try:
@@ -129,7 +75,7 @@ def perform_analysis(article_text, title, features, models, config, bias_terms=N
                     elif label == 'POSITIVE':
                         score = score
                     else:
-                        score = 0  # For 'NEUTRAL' or any other labels
+                        score = 0
                     total_sentiments.append(score)
             except Exception as e:
                 logger.error(f"Error during sentiment analysis: {e}")
@@ -137,7 +83,6 @@ def perform_analysis(article_text, title, features, models, config, bias_terms=N
         # Bias Detection
         if "Bias Detection" in features:
             try:
-                # Use bias terms from config or session state
                 terms = bias_terms if bias_terms else models.get('bias_terms', [])
                 detected = [term for term in terms if re.search(r'\b' + re.escape(term) + r'\b', chunk, re.IGNORECASE)]
                 if detected:
@@ -149,6 +94,7 @@ def perform_analysis(article_text, title, features, models, config, bias_terms=N
                         'explanation': explain_bias(unique_terms)
                     }
                     all_biased_sentences.append(biased_sentence)
+                    logger.info(f"Bias detected in chunk {idx}: {unique_terms}")
             except Exception as e:
                 logger.error(f"Error during bias detection: {e}")
 
@@ -174,9 +120,14 @@ def perform_analysis(article_text, title, features, models, config, bias_terms=N
                     sequence_class_index = torch.argmax(sequence_logits, dim=-1)
                     sequence_class = propaganda_model.sequence_tags.get(sequence_class_index.item(), 'Non-Propaganda')
 
+                    sequence_confidence = torch.softmax(sequence_logits, dim=-1)[0][sequence_class_index].item()
+
                     techniques = set()
 
-                    if sequence_class.lower() == 'propaganda':
+                    # Define a confidence threshold to ensure accurate detection
+                    confidence_threshold = 0.7
+
+                    if sequence_class.lower() == 'propaganda' and sequence_confidence > confidence_threshold:
                         # Token Classification
                         token_logits = outputs['token_logits']
                         token_class_indices = torch.argmax(token_logits, dim=-1)
@@ -188,8 +139,7 @@ def perform_analysis(article_text, title, features, models, config, bias_terms=N
                             if mask == 1 and token not in ["[CLS]", "[SEP]", "[PAD]"]:
                                 tag = propaganda_model.token_tags.get(tag_idx.item(), 'O')
                                 if tag != 'O':
-                                    # Normalize label by replacing underscores with spaces
-                                    normalized_tag = tag.replace('_', ' ')
+                                    normalized_tag = tag.replace('_', ' ').title()
                                     techniques.add(normalized_tag)
 
                         if techniques:
@@ -197,11 +147,11 @@ def perform_analysis(article_text, title, features, models, config, bias_terms=N
                             propaganda_sentence = {
                                 'sentence': chunk,
                                 'detected_terms': list(techniques),
-                                'explanation': explain_propaganda(techniques)
+                                'explanation': explain_propaganda(list(techniques))
                             }
                             all_propaganda_sentences.append(propaganda_sentence)
+                            logger.info(f"Propaganda techniques detected in chunk {idx}: {techniques}")
                         else:
-                            # If no specific techniques detected, but sequence is propaganda
                             propaganda_count += 1
                             propaganda_sentence = {
                                 'sentence': chunk,
@@ -209,6 +159,7 @@ def perform_analysis(article_text, title, features, models, config, bias_terms=N
                                 'explanation': explain_propaganda([sequence_class]),
                             }
                             all_propaganda_sentences.append(propaganda_sentence)
+                            logger.info(f"General propaganda detected in chunk {idx}: {sequence_class}")
             except Exception as e:
                 logger.error(f"Error during propaganda detection: {e}")
 
@@ -282,8 +233,9 @@ def calculate_final_score(sentiment_score, bias_count, propaganda_count, config)
             (100 - bias_penalty) * bias_weight +
             (100 - propaganda_penalty) * propaganda_weight
         )
-        final_score = max(min(final_score, 100), 0)  # Ensure score is between 0 and 100
+        final_score = max(min(final_score, 100), 0)
         final_score = round(final_score, 2)
+        logger.info(f"Final Score Calculated: {final_score}")
         return final_score
     except Exception as e:
         logger.error(f"Error calculating final score: {e}", exc_info=True)
@@ -311,20 +263,27 @@ def describe_propaganda_term(term):
     Provide user-friendly descriptions for each propaganda technique.
     """
     descriptions = {
-        "Appeal to Authority": "using references to influential people to support an argument without substantial evidence",
-        "Appeal to Fear-Prejudice": "playing on people's fears or prejudices to influence their opinion",
-        "Bandwagon, Reductio ad Hitlerum": "suggesting that something is good because many people do it",
-        "Black-and-White Fallacy": "presenting only two options when more exist",
+        "Appeal To Authority": "using references to influential people to support an argument without substantial evidence",
+        "Directive Statement": "issuing clear instructions or orders to influence behavior",
+        "Policy Declaration": "formally announcing new policies or regulations to inform or direct public action",
+        "Appeal To Fear-Prejudice": "playing on people's fears or prejudices to influence their opinion",
+        "Bandwagon": "suggesting that something is good because many people do it",
+        "Reductio Ad Hitlerum": "comparing an opponent to Hitler or Nazis to discredit them",
+        "Black-And-White Fallacy": "presenting only two options when more exist",
         "Causal Oversimplification": "reducing a complex issue to a single cause",
         "Doubt": "casting doubt on an idea without sufficient justification",
-        "Exaggeration, Minimisation": "making something seem better or worse than it is",
+        "Exaggeration": "making something seem better or worse than it is",
+        "Minimisation": "downplaying the significance of an issue",
         "Flag-Waving": "appealing to patriotism or nationalism to support an argument",
         "Loaded Language": "using emotionally charged words to influence opinion",
-        "Name Calling, Labeling": "attaching negative labels to individuals or groups without evidence",
+        "Name Calling": "attaching negative labels to individuals or groups without evidence",
+        "Labeling": "applying simplistic labels to complex situations or people",
         "Repetition": "repeating a message multiple times to reinforce it",
         "Slogans": "using catchy phrases to simplify complex ideas",
-        "Thought-terminating Clichés": "using clichés to end debate or discussion",
-        "Whataboutism, Straw Men, Red Herring": "distracting from the main issue with irrelevant points",
+        "Thought-Terminating Clichés": "using clichés to end debate or discussion",
+        "Whataboutism": "distracting from the main issue with irrelevant points",
+        "Straw Man": "misrepresenting an opponent's argument to make it easier to attack",
+        "Red Herring": "introducing an irrelevant topic to divert attention from the original issue",
         "Propaganda": "the use of information, ideas, or rumors to influence public opinion",
         "Non-Propaganda": "no propaganda detected"
     }
