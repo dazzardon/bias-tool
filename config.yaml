@@ -4,6 +4,7 @@ models:
   sentiment_model: "distilbert-base-uncased-finetuned-sst-2-english"
 
 bias_terms:
+  # Negative Sentiment Terms
   - alarming
   - allegations
   - unfit
@@ -98,5 +99,5 @@ scoring:
   sentiment_weight: 0.4
   bias_weight: 0.3
   propaganda_weight: 0.3
-  max_bias: 10
-  max_propaganda: 10
+  max_bias: 20
+  max_propaganda: 20
