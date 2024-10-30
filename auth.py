@@ -13,10 +13,8 @@ def hash_password(password):
     Hash a password for storing using bcrypt.
     """
     try:
-        # Generate a salt
-        salt = bcrypt.gensalt()
-        # Hash the password
-        hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
+        # Generate a salt and hash the password
+        hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         return hashed.decode('utf-8')
     except Exception as e:
         logger.error(f"Error hashing password: {e}")
