@@ -1,14 +1,18 @@
+# Core Dependencies
 streamlit==1.25.0
 numpy==1.23.5
 pandas==1.5.3
 transformers==4.35.0
-torch==2.0.1  # We'll address torch separately
+torch==2.0.1
 spacy==3.6.1
-en-core-web-sm==3.6.0
 PyYAML==6.0
 bcrypt==4.0.1
 beautifulsoup4==4.12.2
 requests==2.31.0
 plotly==5.13.1
-setuptools==68.0.0
-distlib
+
+# Additional Dependencies
+en-core-web-sm==3.6.0
+
+# Ensure setuptools is up-to-date to avoid distutils issues
+setuptools>=68.0.0
